@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015-present, Parse, LLC.
+  ~ All rights reserved.
+  ~
+  ~ This source code is licensed under the BSD-style license found in the
+  ~ LICENSE file in the root directory of this source tree. An additional grant
+  ~ of patent rights can be found in the PATENTS file in the same directory.
+  -->
+<resources>
+    <string name="parse_app_id">7payYpQ3MCpvvsPtxNpsO7HQDTQ065Am5Im9Q6d6</string>
+    <string name="parse_client_key">r3ctntIubU1m6wm112Ml4K1lzPjRa30CpSwm28im</string>
+
+    <string name="app_name">Campusdate</string>
+
+    <string name="hello_world">Hello World!</string>
+    <string name="action_settings">Settings</string>
+</resources>
