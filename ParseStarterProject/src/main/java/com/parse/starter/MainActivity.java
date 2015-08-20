@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
+import com.parse.ui.ParseLoginBuilder;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -25,6 +26,9 @@ public class MainActivity extends ActionBarActivity {
     setContentView(R.layout.activity_main);
 
     ParseAnalytics.trackAppOpenedInBackground(getIntent());
+
+    ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
+    startActivityForResult(builder.build(), 0);
   }
 
   @Override
