@@ -11,10 +11,23 @@
     android:weightSum="1"
     >
 
-    <TableRow>
+    <TableRow android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="70dp"
+        android:background="@color/white"
+        >
         <TextView
             android:text="Profile Photo"
-            android:padding="15dip" />
+            android:padding="27dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/profile_photo_lo"
+            android:id="@+id/profile_photo"
+            android:layout_column="1"
+
+            />
 
     </TableRow>
 
