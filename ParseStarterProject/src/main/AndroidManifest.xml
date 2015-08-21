@@ -51,6 +51,10 @@
             android:name=".Matches"
             android:label="@string/title_activity_matches" >
         </activity>
+        <activity
+            android:name=".Swipe"
+            android:label="@string/title_activity_swipe" >
+        </activity>
     </application>
 
 </manifest>

@@ -26,13 +26,12 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
-        //Start Parse Login
-        ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
-        startActivityForResult(builder.build(), 0);
 
 
         final ActionBar actionBar = getActionBar();
@@ -65,19 +64,12 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void go_to_login_page(View view) {
 
-    public void go_to_profile(View view) {
-        Intent intent = new Intent(this, ProfilePageActivity.class);
-        startActivity(intent);
+        //Start Parse Login
+        ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
+        startActivityForResult(builder.build(), 0);
     }
 
-    public void go_to_matches(View view) {
-        Intent intent = new Intent(this, Matches.class);
-        startActivity(intent);
-    }
 
-    public void go_to_swipe(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }

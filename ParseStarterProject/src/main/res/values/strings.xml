@@ -25,6 +25,7 @@
         <item>Female</item>
     </string-array>
     <string name="title_activity_matches">Matches</string>
+    <string name="title_activity_swipe">Swipe</string>
 
 
 
