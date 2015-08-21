@@ -10,10 +10,12 @@ package com.parse.starter;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
@@ -61,5 +63,21 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void go_to_profile(View view) {
+        Intent intent = new Intent(this, ProfilePageActivity.class);
+        startActivity(intent);
+    }
+
+    public void go_to_matches(View view) {
+        Intent intent = new Intent(this, Matches.class);
+        startActivity(intent);
+    }
+
+    public void go_to_swipe(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

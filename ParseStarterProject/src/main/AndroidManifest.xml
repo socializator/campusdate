@@ -47,6 +47,10 @@
             android:name=".ProfilePageActivity"
             android:label="@string/title_activity_profile_page" >
         </activity>
+        <activity
+            android:name=".Matches"
+            android:label="@string/title_activity_matches" >
+        </activity>
     </application>
 
 </manifest>

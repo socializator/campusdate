@@ -26,19 +26,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/swipe_tab"
-            android:id="@+id/button" />
+            android:id="@+id/swipe_button"
+            android:onClick="go_to_swipe"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/matches_tab"
-            android:id="@+id/button2" />
+            android:id="@+id/matches_button"
+            android:onClick="go_to_matches"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profile_tab"
-            android:id="@+id/button3" />
+            android:id="@+id/profile_button"
+            android:onClick="go_to_profile"/>
 
     </LinearLayout>
 
