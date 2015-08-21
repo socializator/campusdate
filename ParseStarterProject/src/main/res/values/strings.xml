@@ -19,4 +19,13 @@
     <string name="swipe_tab">Swipe</string>
     <string name="matches_tab">Matches</string>
     <string name="profile_tab">Profile</string>
+
+    <string-array name="gender_items">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+
+
+
 </resources>

@@ -9,33 +9,27 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ProfilePageActivity extends ActionBarActivity {
+public class ProfilePageActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+
+    public Spinner genderSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
 
-        String[] profileItems = {"Profile Photo", "Name", "Gender", "Age", ".edu Email",
-                "College", "Major", "Sexuality", "What's Up"};
+        genderSpinner = (Spinner) findViewById(R.id.gender_spinner);
 
-        ListAdapter theAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                profileItems);
-        ListView theListView = (ListView) findViewById(R.id.listView);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.gender_items,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(adapter);
 
-        theListView.setAdapter(theAdapter);
+        genderSpinner.setOnItemSelectedListener(this);
 
-        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String ItemPicked = "You selected " +
-                        String.valueOf(adapterView.getItemAtPosition(position));
-
-                Toast.makeText(ProfilePageActivity.this, ItemPicked, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -59,4 +53,15 @@ public class ProfilePageActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id){
+            parent.getItemAtPosition(pos);
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
+
 }
