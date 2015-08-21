@@ -63,15 +63,30 @@
 
     <TableRow>
         <TextView
-            android:text="Sexuality"
+            android:text="Gender Interested In"
             android:padding="15dip" />
 
-        <Spinner
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/sexuality_spinner"
-            android:layout_column="1" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:id="@+id/male_checkBox"
+            android:layout_column="1"
+            android:onClick="onCheckboxClicked"
+            />
 
+
+    </TableRow>
+
+    <TableRow>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:id="@+id/female_checkBox"
+            android:layout_column="1"
+            android:onClick="onCheckboxClicked"
+            />
     </TableRow>
 
     <TableRow>

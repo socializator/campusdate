@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -61,6 +62,28 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
+    }
+
+    public void onCheckboxClicked(View view){
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.male_checkBox:
+                if (checked) {
+                }
+                else {
+                }
+                break;
+            case R.id.female_checkBox:
+                if (checked) {
+                }
+                else {
+                }
+                break;
+
+        }
     }
 
 
