@@ -16,4 +16,7 @@
     <string name="hello_world">Hello World!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_profile_page">ProfilePageActivity</string>
+    <string name="swipe_tab">Swipe</string>
+    <string name="matches_tab">Matches</string>
+    <string name="profile_tab">Profile</string>
 </resources>
