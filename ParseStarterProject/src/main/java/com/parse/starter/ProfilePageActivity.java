@@ -64,7 +64,7 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
         // Another interface callback
     }
 
-    public void onCheckboxClicked(View view){
+    /*public void onCheckboxClicked(View view){
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
 
@@ -84,7 +84,7 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
                 break;
 
         }
-    }
+    }*/
 
 
 }
