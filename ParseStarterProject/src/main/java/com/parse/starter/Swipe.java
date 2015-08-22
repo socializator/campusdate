@@ -3,9 +3,17 @@ package com.parse.starter;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseException;
+import com.parse.GetCallback;
+
+import java.util.List;
 
 public class Swipe extends ActionBarActivity {
 
@@ -51,4 +59,25 @@ public class Swipe extends ActionBarActivity {
         Intent intent = new Intent(this, Swipe.class);
         startActivity(intent);
     }
+
+    public void get_data(View view) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
+        query.getInBackground("SSt3d94kVd", new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+
+                String email = object.getString("email");
+
+                if (e == null) {
+                    System.out.println("succees" + email);
+                } else {
+                    System.out.println("fail" + email);
+                }
+            }
+        });
+    }
+
+
+
+
+
 }
