@@ -115,6 +115,13 @@
             android:layout_height="wrap_content"
             android:text="Like"
             android:id="@+id/button5" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Data"
+            android:id="@+id/test_button"
+            android:onClick="get_data"/>
     </LinearLayout>
 
 </RelativeLayout>
