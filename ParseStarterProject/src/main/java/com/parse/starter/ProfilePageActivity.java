@@ -25,8 +25,14 @@ import com.parse.ParseUser;
 
 public class ProfilePageActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
-    public Spinner genderSpinner;
+
     protected EditText firstNameEditText;
+    protected EditText lastNameEditText;
+    protected EditText ageEditText;
+    protected EditText majorEditText;
+    protected EditText whatsupEditText;
+
+    protected Spinner genderSpinner;
 
     protected Button saveButton;
     @Override
@@ -35,7 +41,7 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
         setContentView(R.layout.profile_page);
 
         // /Spinner
-        genderSpinner = (Spinner) findViewById(R.id.gender_spinner);
+        genderSpinner = (Spinner) findViewById(R.id.genderSpinnerProfile);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_items,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -44,6 +50,11 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
 
         //Connect objects with ids
         firstNameEditText = (EditText)findViewById(R.id.firstNameProfile);
+        lastNameEditText = (EditText)findViewById(R.id.lastNameProfile);
+        ageEditText = (EditText)findViewById(R.id.ageProfile);
+        majorEditText = (EditText)findViewById(R.id.majorProfile);
+        whatsupEditText = (EditText)findViewById(R.id.whatsupProfile);
+
         saveButton = (Button)findViewById(R.id.saveButtonProfile);
 
         //Listen to save button click
@@ -56,16 +67,24 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
                 //String currentUserObjectIdID = currentUser.getObjectId();
                 String currentUserObjectIdID = "r22mHwUeTu";
 
+                ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
+
                 //update an object
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
                 // Retrieve the object by id
 
-                query.whereEqualTo("Me", currentUserObjectIdID);
-
+                query.whereEqualTo("Me", obj);
 
                 query.getFirstInBackground(new GetCallback<ParseObject>() {
 
+                    //create string to hold user input text
                     String firstName = firstNameEditText.getText().toString();
+                    String lastName = lastNameEditText.getText().toString();
+                    String age = ageEditText.getText().toString();
+                    String major = majorEditText.getText().toString();
+                    String whatsup = whatsupEditText.getText().toString();
+
+                    String gender = genderSpinner.getSelectedItem().toString();
 
                     public void done(ParseObject profile, ParseException e) {
                         if (e == null) {
@@ -73,6 +92,13 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
                             // will get sent to the Parse Cloud. playerName hasn't changed
                             //if (firstName != null) {
                             profile.put("FirstName", firstName);
+                            profile.put("LastName", lastName);
+                            profile.put("Age", age);
+                            profile.put("Major", major);
+                            profile.put("WhatsUp", whatsup);
+
+                            profile.put("Gender", gender);
+
                             profile.saveInBackground();
                             System.out.println("Success");
 

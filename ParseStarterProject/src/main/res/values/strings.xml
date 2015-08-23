@@ -21,6 +21,7 @@
     <string name="profile_tab">Profile</string>
 
     <string-array name="gender_items">
+        <item>Not Selected</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
