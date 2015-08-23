@@ -33,6 +33,8 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
     protected EditText whatsupEditText;
 
     protected Spinner genderSpinner;
+    protected CheckBox maleInterestCheckBox;
+    protected CheckBox femaleInterestCheckBox;
 
     protected Button saveButton;
     @Override
@@ -55,6 +57,11 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
         majorEditText = (EditText)findViewById(R.id.majorProfile);
         whatsupEditText = (EditText)findViewById(R.id.whatsupProfile);
 
+        //check boxes
+        maleInterestCheckBox = (CheckBox)findViewById(R.id.maleCheckBoxProfile);
+        femaleInterestCheckBox = (CheckBox)findViewById(R.id.femaleCheckBoxProfile);
+
+        //save button
         saveButton = (Button)findViewById(R.id.saveButtonProfile);
 
         //Listen to save button click
@@ -86,6 +93,9 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
 
                     String gender = genderSpinner.getSelectedItem().toString();
 
+                    Boolean maleInterest = maleInterestCheckBox.isChecked();
+                    Boolean femaleInterest = femaleInterestCheckBox.isChecked();
+
                     public void done(ParseObject profile, ParseException e) {
                         if (e == null) {
                             // Now let's update it with some new data. In this case, only cheatMode and score
@@ -98,6 +108,9 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
                             profile.put("WhatsUp", whatsup);
 
                             profile.put("Gender", gender);
+
+                            profile.put("InterestInMale", maleInterest);
+                            profile.put("InterestInFemale", femaleInterest);
 
                             profile.saveInBackground();
                             System.out.println("Success");
@@ -143,27 +156,6 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
         // Another interface callback
     }
 
-    public void onCheckboxClicked(View view){
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-        // Check which checkbox was clicked
-        switch(view.getId()) {
-            case R.id.male_checkBox:
-                if (checked) {
-                }
-                else {
-                }
-                break;
-            case R.id.female_checkBox:
-                if (checked) {
-                }
-                else {
-                }
-                break;
-
-        }
-    }
 
 
 }

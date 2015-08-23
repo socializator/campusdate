@@ -146,9 +146,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Male"
-            android:id="@+id/male_checkBox"
+            android:id="@+id/maleCheckBoxProfile"
             android:layout_column="1"
-            android:onClick="onCheckboxClicked"
+
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView9"
             android:layout_toEndOf="@+id/textView9"
@@ -158,9 +158,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Female"
-            android:id="@+id/female_checkBox"
+            android:id="@+id/femaleCheckBoxProfile"
             android:layout_column="1"
-            android:onClick="onCheckboxClicked"
+
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
