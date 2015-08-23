@@ -15,7 +15,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/white">
 
         <TextView
@@ -61,7 +60,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/firstName"
+            android:id="@+id/firstNameProfile"
 
 
             android:layout_centerVertical="true"
@@ -114,39 +113,34 @@
             android:id="@+id/textView8" />
 
         <Spinner
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/gender_spinner"
 
             android:entries="@array/gender_items"
             android:layout_toEndOf="@+id/textView8"
-            android:layout_toRightOf="@+id/textView8"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
 
-            />
+            android:layout_marginLeft="61dp"
+            android:layout_marginStart="61dp"
+            android:layout_toRightOf="@+id/textView8"
+            android:layout_alignTop="@+id/textView8"
+            android:layout_alignBottom="@+id/textView8" />
 
     </RelativeLayout>
 
-    <!--TableRow>
-        <TextView
-            android:text="Gender"
-            android:padding="15dip" />
 
-        <Spinner
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/gender_spinner"
-            android:layout_column="1"
-            android:entries="@array/gender_items"/>
-
-    </TableRow>
-
-    <TableRow>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
         <TextView
             android:text="Gender Interested In"
-            android:padding="15dip" />
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView9" />
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -155,12 +149,11 @@
             android:id="@+id/male_checkBox"
             android:layout_column="1"
             android:onClick="onCheckboxClicked"
-            />
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView9"
+            android:layout_toEndOf="@+id/textView9"
+            android:layout_marginLeft="15dp"/>
 
-
-    </TableRow>
-
-    <TableRow>
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,23 +161,90 @@
             android:id="@+id/female_checkBox"
             android:layout_column="1"
             android:onClick="onCheckboxClicked"
-            />
-    </TableRow>
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp" />
+    </RelativeLayout>
 
-    <TableRow>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray">
+
         <TextView
             android:text="Age"
-            android:padding="15dip" />
+            android:padding="15dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ems="10"
             android:id="@+id/age"
-            android:layout_column="1" />
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+             />
 
-    </TableRow>
+    </RelativeLayout>
 
-    <TableRow>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <TextView
+            android:text="Major"
+            android:padding="15dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/major"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray">
+        <TextView
+            android:text="What's Up"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/whatsup"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/saveButtonProfile"
+        android:layout_marginLeft="39dp"
+        android:layout_marginStart="39dp"
+        android:layout_gravity="right" />
+
+
+    <!--TableRow>
         <TextView
             android:text=".edu Email"
             android:padding="15dip" />
@@ -194,32 +254,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/eduEmail"
             android:layout_column="1" />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:text="Major"
-            android:padding="15dip" />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/major"
-            android:layout_column="1" />
-
-    </TableRow>
-
-
-    <TableRow>
-        <TextView
-            android:text="What's Up"
-            android:padding="15dip" />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/whatsup"
-            android:layout_column="1" />
     </TableRow-->
-
 
 
 </LinearLayout>
