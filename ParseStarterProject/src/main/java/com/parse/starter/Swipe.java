@@ -8,10 +8,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseException;
 import com.parse.GetCallback;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -61,16 +64,22 @@ public class Swipe extends ActionBarActivity {
     }
 
     public void get_data(View view) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
-        query.getInBackground("SSt3d94kVd", new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
 
-                String email = object.getString("email");
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
 
+        //query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
+        //TEST
+        query.whereEqualTo("email_domain", "hotmail");
+        //query.whereEqualTo("gender", "female");
+
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
-                    System.out.println("succees" + email);
+                    for (ParseObject object : objects) {
+                        System.out.println(object);
+                    }
                 } else {
-                    System.out.println("fail" + email);
+                    System.out.println("FAIL: " + objects);
                 }
             }
         });
