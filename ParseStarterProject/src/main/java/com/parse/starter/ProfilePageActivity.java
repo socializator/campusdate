@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -44,7 +45,7 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
 
         // /Spinner
         genderSpinner = (Spinner) findViewById(R.id.genderSpinnerProfile);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_items,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(adapter);
@@ -63,6 +64,55 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
 
         //save button
         saveButton = (Button)findViewById(R.id.saveButtonProfile);
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        //String currentUserObjectIdID = currentUser.getObjectId();
+        String currentUserObjectIdID = "r22mHwUeTu";
+
+        ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+        query.whereEqualTo("Me", obj);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+
+                    firstNameEditText.setText(object.getString
+                            ("FirstName"),TextView.BufferType.EDITABLE);
+                    lastNameEditText.setText(object.getString
+                            ("LastName"),TextView.BufferType.EDITABLE);
+                    ageEditText.setText(object.getString
+                            ("Age"),TextView.BufferType.EDITABLE);
+                    majorEditText.setText(object.getString
+                            ("Major"), TextView.BufferType.EDITABLE);
+                    whatsupEditText.setText(object.getString
+                            ("WhatsUp"), TextView.BufferType.EDITABLE);
+
+                    genderSpinner.setSelection(adapter.getPosition(object.getString("Gender")));
+
+                    boolean maleChecked = object.getBoolean("InterestInMale");
+                    boolean femaleChecked = object.getBoolean("InterestInFemale");
+
+                    if(maleChecked == true){
+                        maleInterestCheckBox.setChecked(true);
+                    }else{
+                        maleInterestCheckBox.setChecked(false);
+                    }
+
+                    if(femaleChecked == true){
+                        femaleInterestCheckBox.setChecked(true);
+                    }else{
+                        femaleInterestCheckBox.setChecked(false);
+                    }
+
+                } else {
+                    // something went wrong
+                }
+            }
+        });
+
+
+
 
         //Listen to save button click
         saveButton.setOnClickListener(new View.OnClickListener(){
