@@ -64,19 +64,42 @@ public class Swipe extends ActionBarActivity {
     }
 
     public void get_data(View view) {
-
+/*
         ParseQuery<ParseUser> query = ParseUser.getQuery();
 
         //query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
         //TEST
         query.whereEqualTo("email_domain", "hotmail");
         //query.whereEqualTo("gender", "female");
+        query.whereNotEqualTo("objectId","bob");
 
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
                     for (ParseObject object : objects) {
                         System.out.println(object);
+                    }
+                } else {
+                    System.out.println("FAIL: " + objects);
+                }
+            }
+        });
+
+        */
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+
+        //query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
+        query.whereEqualTo("email_domain", "hotmail");
+        //query.whereEqualTo("gender", ParseUser.getCurrentUser().get("InterestinFemale"));
+        //query.whereEqualTo("gender", "female");
+        query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
+        query.whereNotEqualTo("objectId",ParseUser.getCurrentUser().get("profile")());
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    for (ParseObject object : objects) {
+                        System.out.println("success" + object);
                     }
                 } else {
                     System.out.println("FAIL: " + objects);
