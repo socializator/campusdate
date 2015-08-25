@@ -68,134 +68,61 @@ public class Swipe extends ActionBarActivity {
     }
 
     public void get_data(View view) {
-/*
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-
-        //query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
-        //TEST
-        query.whereEqualTo("email_domain", "hotmail");
-        //query.whereEqualTo("gender", "female");
-        query.whereNotEqualTo("objectId","bob");
-
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> objects, ParseException e) {
-                if (e == null) {
-                    for (ParseObject object : objects) {
-                        System.out.println(object);
-                    }
-                } else {
-                    System.out.println("FAIL: " + objects);
-                }
-            }
-        });
-
-        */
-
-
         final ArrayList<String> seen_list = new ArrayList<String>();
-        final ArrayList<String> r_list = new ArrayList<String>();
+        final ArrayList<String> result_list = new ArrayList<String>();
 
+        ParseQuery<ParseObject> users_seen_query = ParseQuery.getQuery("Profile");
 
-        ParseQuery<ParseObject> query3 = ParseQuery.getQuery("Profile");
-        query3.whereEqualTo("Me", "r22mHwUeTu");
-        query3.getFirstInBackground(new GetCallback<ParseObject>() {
+        //users_seen_query.whereEqualTo("Me", ParseUser.getCurrentUser().getObjectId());
+        users_seen_query.whereEqualTo("Me", "r22mHwUeTu");
+
+        users_seen_query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     for (Object s : object.getList("users_seen")) {
                         seen_list.add(s.toString());
                     }
-                    // fetch user
-                    ParseQuery<ParseUser> query = ParseUser.getQuery();
-                    //query.whereContainsAll("objectId", seen_list);
-                    query.whereNotContainedIn("objectId", seen_list);
-                    query.findInBackground(new FindCallback<ParseUser>() {
-                        public void done(List<ParseUser> userlist, ParseException e) {
+
+                    //ParseQuery<ParseUser> users_list_query = ParseUser.getQuery();
+                    ParseQuery<ParseObject> users_list_query = ParseQuery.getQuery("Profile");
+
+                    //users_list_query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
+                    users_list_query.whereEqualTo("email_domain", "hotmail");
+
+                    /*
+                    if (ParseUser.getCurrentUser().get("IntrestedInFemale") == true) {
+                        users_list_query.whereEqualTo("gender", "female");
+
+                    }
+                    if (ParseUser.getCurrentUser().get("IntrestedInMale") == true) {
+
+                        users_list_query.whereEqualTo("gender", "male");
+                    }
+                    */
+                    users_list_query.whereEqualTo("Gender", "male");
+
+                    users_list_query.whereNotContainedIn("Me", seen_list);
+
+                    //users_list_query.whereNotEqualTo("Me", ParseUser.getCurrentUser().getObjectId());
+
+                    users_list_query.findInBackground(new FindCallback<ParseObject>() {
+                        public void done(List<ParseObject> userlist, ParseException e) {
                             if (e == null) {
-                                for (ParseUser s : userlist) {
-                                    //checking
-                                    r_list.add(s.getObjectId());
+                                for (ParseObject s : userlist) {
+                                    result_list.add(s.getObjectId());
                                 }
-                                // do stuff with r_list here
-                                for(String s:r_list) {
+                                for (String s : result_list) {
                                     System.out.println(s);
                                 }
-
-
                             } else {
-                                Log.d("score", "Error: " + e.getMessage());
+                                System.out.println("FAIL!");
                             }
                         }
                     });
                 } else {
-                    Log.d("score", "Retrieved the object.");
+                    System.out.println("FAIL!");
                 }
             }
         });
-
-
-
-
-//        ParseQuery<ParseUser> query = ParseUser.getQuery();
-//        query.findInBackground(new FindCallback<ParseUser>() {
-//            public void done(List<ParseUser> userlist, ParseException e) {
-//                if (e == null) {
-//                    for (ParseUser s : userlist) {
-//                        //checking
-//                        r_list.add(s.getObjectId());
-//                    }
-//                    // do stuff with r_list here
-//
-//                    System.out.println(r_list.get(2));
-//
-//
-//
-//                } else {
-//                    Log.d("score", "Error: " + e.getMessage());
-//                }
-//            }
-//        });
-
-
-
-
-
-
-
-//
-//        ParseQuery<ParseObject> query3 = ParseQuery.getQuery("Profile");
-//        //query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
-//        //query.whereEqualTo("email_domain", "hotmail");
-//        //query.whereEqualTo("gender", ParseUser.getCurrentUser().get("InterestinFemale"));
-//        //query.whereEqualTo("Gender", "male");
-//        //query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
-//        //query.whereEqualTo("Me",ParseUser.getCurrentUser().getObjectId());
-//        query.whereEqualTo("Me", "r22mHwUeTu");
-//        query.getFirstInBackground(new GetCallback<ParseObject>() {
-//            public void done(ParseObject object, ParseException e) {
-//                if (e == null) {
-//
-//                    for (Object s : object.getList("users_seen")) {
-//                        if(s.toString().equals("3t3g")){
-//                            // not add to list
-//                            //System.out.println("WORKS");
-//                        }
-//                        else{
-//                            r_list.add(s.toString());
-//                        }
-//                        //System.out.println(s.toString());
-//                    }
-//
-//
-//
-//
-//                } else {
-//                    Log.d("score", "Retrieved the object.");
-//                }
-//            }
-//        });
-
-
     }
-
-
 }
