@@ -44,7 +44,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
+            android:id="@+id/swipe_photo"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
@@ -52,49 +52,49 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Bob Smith"
-            android:id="@+id/textView" />
+            android:id="@+id/swipe_name" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="BIo:"
-            android:id="@+id/textView2" />
+            android:id="@+id/swipe_bio" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Gender"
-            android:id="@+id/textView6" />
+            android:id="@+id/swipe_gender" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Sexuality"
-            android:id="@+id/textView7" />
+            android:id="@+id/swipe_sexuality" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Major"
-            android:id="@+id/textView3" />
+            android:id="@+id/swipe_major" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Year"
-            android:id="@+id/textView4" />
+            android:id="@+id/swipe_year" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="College"
-            android:id="@+id/textView5" />
+            android:id="@+id/swipe_college" />
 
     </LinearLayout>
 
@@ -108,20 +108,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dislike"
-            android:id="@+id/button4" />
+            android:id="@+id/swipe_dislike" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Like"
-            android:id="@+id/button5" />
+            android:id="@+id/swipe_like" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Get Data"
-            android:id="@+id/test_button"
+            android:id="@+id/swipe_test_button"
             android:onClick="get_data"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Profiles"
+            android:id="@+id/view_profiles_button"
+            android:onClick="view_profiles"/>
     </LinearLayout>
 
 </RelativeLayout>

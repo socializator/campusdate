@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.parse.CountCallback;
 import com.parse.FindCallback;
@@ -23,6 +24,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Swipe extends ActionBarActivity {
+
+    ArrayList<String> final_list = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,7 @@ public class Swipe extends ActionBarActivity {
     }
 
     public void get_data(View view) {
+
         final ArrayList<String> seen_list = new ArrayList<String>();
         final ArrayList<String> result_list = new ArrayList<String>();
 
@@ -112,6 +116,7 @@ public class Swipe extends ActionBarActivity {
                                     result_list.add(s.getObjectId());
                                 }
                                 for (String s : result_list) {
+                                    final_list = result_list;
                                     System.out.println(s);
                                 }
                             } else {
@@ -121,6 +126,27 @@ public class Swipe extends ActionBarActivity {
                     });
                 } else {
                     System.out.println("FAIL!");
+                }
+            }
+        });
+    }
+
+    public void view_profiles(View view) {
+        System.out.println(final_list);
+        final TextView swipe_name = (TextView) findViewById(R.id.swipe_name);
+        //swipe_name.setText("Hello");
+
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+        //query.whereEqualTo("objectId" , final_list.get(0))
+        query.getInBackground(final_list.get(0), new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    // object will be your game score
+                    String name = object.getString("FirstName");
+                    swipe_name.setText(name);
+                } else {
+                    // something went wrong
                 }
             }
         });
