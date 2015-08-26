@@ -27,10 +27,8 @@
     </string-array>
     <string name="title_activity_matches">Matches</string>
     <string name="title_activity_swipe">Swipe</string>
-
-
-
-
+    <string name="dislike">Dislike</string>
+    <string name="like">Like</string>
 
 
 </resources>

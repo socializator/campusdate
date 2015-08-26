@@ -77,6 +77,15 @@ public class Swipe extends ActionBarActivity {
         startActivity(intent);
     }
 
+
+    public void dislike_user(View view) {
+
+    }
+
+    public void like_user(View view) {
+
+    }
+
     public void get_data(View view) {
 
         final ArrayList<String> seen_list = new ArrayList<String>();
@@ -84,8 +93,8 @@ public class Swipe extends ActionBarActivity {
 
         ParseQuery<ParseObject> users_seen_query = ParseQuery.getQuery("Profile");
 
-        //users_seen_query.whereEqualTo("Me", ParseUser.getCurrentUser().getObjectId());
-        users_seen_query.whereEqualTo("Me", "r22mHwUeTu");
+        //users_seen_query.whereEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
+        users_seen_query.whereEqualTo("user_object_id", "r22mHwUeTu");
 
         users_seen_query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
@@ -101,20 +110,20 @@ public class Swipe extends ActionBarActivity {
                     users_list_query.whereEqualTo("email_domain", "hotmail");
 
                     /*
-                    if (ParseUser.getCurrentUser().get("IntrestedInFemale") == true) {
+                    if (ParseUser.getCurrentUser().get("intrested_in_females") == true) {
                         users_list_query.whereEqualTo("gender", "female");
 
                     }
-                    if (ParseUser.getCurrentUser().get("IntrestedInMale") == true) {
+                    if (ParseUser.getCurrentUser().get("intrested_in_males") == true) {
 
                         users_list_query.whereEqualTo("gender", "male");
                     }
                     */
-                    users_list_query.whereEqualTo("Gender", "male");
+                    users_list_query.whereEqualTo("gender", "male");
 
-                    users_list_query.whereNotContainedIn("Me", seen_list);
+                    users_list_query.whereNotContainedIn("user_object_id", seen_list);
 
-                    //users_list_query.whereNotEqualTo("Me", ParseUser.getCurrentUser().getObjectId());
+                    //users_list_query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
 
                     users_list_query.findInBackground(new FindCallback<ParseObject>() {
                         public void done(List<ParseObject> userlist, ParseException e) {
@@ -148,15 +157,13 @@ public class Swipe extends ActionBarActivity {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     // object will be your game score
-                    String name = object.getString("FirstName");
+                    String name = object.getString("name");
                     swipe_name.setText(name);
-
-
+                    //Set profile picture
                 } else {
                 }
             }
         });
     }
-
 }
 
