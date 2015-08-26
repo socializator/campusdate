@@ -38,6 +38,7 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
     protected CheckBox femaleInterestCheckBox;
 
     protected Button saveButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,24 +47,24 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
         // /Spinner
         genderSpinner = (Spinner) findViewById(R.id.genderSpinnerProfile);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.gender_items,android.R.layout.simple_spinner_item);
+                R.array.gender_items, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(adapter);
         genderSpinner.setOnItemSelectedListener(this);
 
         //Connect objects with ids
-        firstNameEditText = (EditText)findViewById(R.id.firstNameProfile);
-        lastNameEditText = (EditText)findViewById(R.id.lastNameProfile);
-        ageEditText = (EditText)findViewById(R.id.ageProfile);
-        majorEditText = (EditText)findViewById(R.id.majorProfile);
-        whatsupEditText = (EditText)findViewById(R.id.whatsupProfile);
+        firstNameEditText = (EditText) findViewById(R.id.firstNameProfile);
+        lastNameEditText = (EditText) findViewById(R.id.lastNameProfile);
+        ageEditText = (EditText) findViewById(R.id.ageProfile);
+        majorEditText = (EditText) findViewById(R.id.majorProfile);
+        whatsupEditText = (EditText) findViewById(R.id.whatsupProfile);
 
         //check boxes
-        maleInterestCheckBox = (CheckBox)findViewById(R.id.maleCheckBoxProfile);
-        femaleInterestCheckBox = (CheckBox)findViewById(R.id.femaleCheckBoxProfile);
+        maleInterestCheckBox = (CheckBox) findViewById(R.id.maleCheckBoxProfile);
+        femaleInterestCheckBox = (CheckBox) findViewById(R.id.femaleCheckBoxProfile);
 
         //save button
-        saveButton = (Button)findViewById(R.id.saveButtonProfile);
+        saveButton = (Button) findViewById(R.id.saveButtonProfile);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         //String currentUserObjectIdID = currentUser.getObjectId();
@@ -78,11 +79,11 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
                 if (e == null) {
 
                     firstNameEditText.setText(object.getString
-                            ("FirstName"),TextView.BufferType.EDITABLE);
+                            ("FirstName"), TextView.BufferType.EDITABLE);
                     lastNameEditText.setText(object.getString
-                            ("LastName"),TextView.BufferType.EDITABLE);
+                            ("LastName"), TextView.BufferType.EDITABLE);
                     ageEditText.setText(object.getString
-                            ("Age"),TextView.BufferType.EDITABLE);
+                            ("Age"), TextView.BufferType.EDITABLE);
                     majorEditText.setText(object.getString
                             ("Major"), TextView.BufferType.EDITABLE);
                     whatsupEditText.setText(object.getString
@@ -93,15 +94,15 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
                     boolean maleChecked = object.getBoolean("InterestInMale");
                     boolean femaleChecked = object.getBoolean("InterestInFemale");
 
-                    if(maleChecked == true){
+                    if (maleChecked == true) {
                         maleInterestCheckBox.setChecked(true);
-                    }else{
+                    } else {
                         maleInterestCheckBox.setChecked(false);
                     }
 
-                    if(femaleChecked == true){
+                    if (femaleChecked == true) {
                         femaleInterestCheckBox.setChecked(true);
-                    }else{
+                    } else {
                         femaleInterestCheckBox.setChecked(false);
                     }
 
@@ -112,12 +113,10 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
         });
 
 
-
-
         //Listen to save button click
-        saveButton.setOnClickListener(new View.OnClickListener(){
+        saveButton.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View view){
+            public void onClick(View view) {
 
                 //get Current user's objectId
                 ParseUser currentUser = ParseUser.getCurrentUser();
@@ -198,14 +197,13 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id){
-            parent.getItemAtPosition(pos);
+                               int pos, long id) {
+        parent.getItemAtPosition(pos);
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
-
 
 
 }
