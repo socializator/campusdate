@@ -18,9 +18,9 @@
 
 
     <Button
+        android:id="@+id/start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
-        android:id="@+id/start_button"
-        android:onClick="go_to_login_page"/>
+        android:onClick="go_to_login_page"
+        android:text="Start" />
 </RelativeLayout>
