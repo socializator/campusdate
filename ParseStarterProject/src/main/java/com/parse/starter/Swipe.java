@@ -1,12 +1,17 @@
 package com.parse.starter;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.CountCallback;
@@ -18,6 +23,8 @@ import com.parse.ParseException;
 import com.parse.GetCallback;
 import com.parse.ParseUser;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -134,8 +141,6 @@ public class Swipe extends ActionBarActivity {
     public void view_profiles(View view) {
         System.out.println(final_list);
         final TextView swipe_name = (TextView) findViewById(R.id.swipe_name);
-        //swipe_name.setText("Hello");
-
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
         //query.whereEqualTo("objectId" , final_list.get(0))
@@ -145,10 +150,13 @@ public class Swipe extends ActionBarActivity {
                     // object will be your game score
                     String name = object.getString("FirstName");
                     swipe_name.setText(name);
+
+
                 } else {
-                    // something went wrong
                 }
             }
         });
     }
+
 }
+
