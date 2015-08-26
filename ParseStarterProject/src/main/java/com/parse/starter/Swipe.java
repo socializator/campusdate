@@ -40,12 +40,10 @@ public class Swipe extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -66,11 +64,43 @@ public class Swipe extends ActionBarActivity {
 
 
     public void dislike_user(View view) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+        //query.getInBackground(ParseUser.getCurrentUser().get("profile_object_id").toString(), new GetCallback<ParseObject>() {
+        query.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
+            public void done(ParseObject user_seen, ParseException e) {
+                if (e == null) {
 
+                    //user_seen.addUnique("users_seen", final_list.get(final_list.size() - 1));
+                    user_seen.addUnique("users_seen", "yooooo2");
+
+                    user_seen.saveInBackground();
+
+                    final_list.remove(final_list.size() - 1);
+                    final_list.trimToSize();
+                }
+            }
+        });
     }
 
     public void like_user(View view) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+        //query.getInBackground(ParseUser.getCurrentUser().get("profile_object_id").toString(), new GetCallback<ParseObject>() {
+        query.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
+            public void done(ParseObject user_seen, ParseException e) {
+                if (e == null) {
 
+                    //user_seen.addUnique("users_like", final_list.get(final_list.size() - 1));
+                    //user_seen.addUnique("users_seen", final_list.get(final_list.size() - 1));
+                    user_seen.addUnique("users_like", "yooooo2");
+                    user_seen.addUnique("users_seen", "yooooo2");
+
+                    user_seen.saveInBackground();
+
+                    final_list.remove(final_list.size() - 1);
+                    final_list.trimToSize();
+                }
+            }
+        });
     }
 
     public void get_data(View view) {
@@ -138,19 +168,22 @@ public class Swipe extends ActionBarActivity {
         System.out.println(final_list);
         final TextView swipe_name = (TextView) findViewById(R.id.swipe_name);
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
-        //query.whereEqualTo("objectId" , final_list.get(0))
-        query.getInBackground(final_list.get(0), new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    // object will be your game score
-                    String name = object.getString("name");
-                    swipe_name.setText(name);
-                    //Set profile picture
-                } else {
+        if (final_list.size() > 0) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+            //query.whereEqualTo("objectId" , final_list.get(0))
+            query.getInBackground(final_list.get(final_list.size() - 1), new GetCallback<ParseObject>() {
+                public void done(ParseObject object, ParseException e) {
+                    if (e == null) {
+                        // object will be your game score
+                        String name = object.getString("name");
+                        swipe_name.setText(name);
+                        //Set profile picture
+                    } else {
+                    }
                 }
-            }
-        });
+            });
+
+        }
     }
 }
 
