@@ -44,7 +44,7 @@
         android:layout_below="@+id/tabs"
         android:orientation="vertical">
 
-        <ImageView
+        <com.parse.ParseImageView
             android:id="@+id/swipe_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

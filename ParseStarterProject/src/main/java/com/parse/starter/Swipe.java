@@ -6,11 +6,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -25,6 +29,8 @@ public class Swipe extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe3);
+
+
     }
 
     @Override
@@ -177,7 +183,15 @@ public class Swipe extends ActionBarActivity {
                         // object will be your game score
                         String name = object.getString("name");
                         swipe_name.setText(name);
+
                         //Set profile picture
+                        ParseFile image = object.getParseFile("profile_picture");
+                        final ParseImageView imageView = (ParseImageView) findViewById(R.id.swipe_photo);
+                        imageView.setParseFile(image);
+                        imageView.loadInBackground(new GetDataCallback() {
+                            public void done(byte[] data, ParseException e) {
+                            }
+                        });
                     } else {
                     }
                 }
