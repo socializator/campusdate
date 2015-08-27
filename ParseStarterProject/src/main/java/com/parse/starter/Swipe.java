@@ -109,22 +109,53 @@ public class Swipe extends Activity {
 
         //Create match if mutual like
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
-        query.whereEqualTo("playerName", "Dan Stemkoski");
+        query.whereEqualTo("objectId", final_list.get(final_list.size() - 1).toString());
         query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> scoreList, ParseException e) {
+            public void done(List<ParseObject> users_they_like, ParseException e) {
                 if (e == null) {
-                    //Log.d("score", "Retrieved " + scoreList.size() + " scores");
+
+                    //if (users_they_like.contains(ParseUser.getCurrentUser().get("profile_object_id").toString())) {
+                    if (users_they_like.contains("like you")) {
+
+
+                        //create a match
+                        //add to my users_matched_with list
+                        ParseQuery<ParseObject> add_to_my_matches = ParseQuery.getQuery("Profile");
+                        //add_to_their_matches.getInBackground(ParseUser.getCurrentUser().get("profile_object_id").toString(), new GetCallback<ParseObject>() {
+                        add_to_my_matches.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
+                            public void done(ParseObject my_profile, ParseException e) {
+                                if (e == null) {
+                                    //my_profile.addUnique("users_matched_with", final_list.get(final_list.size() - 1).toString());
+                                    my_profile.addUnique("users_matched_with", "users_matched_with working");
+                                } else {
+                                    System.out.println("fail");
+                                }
+                            }
+                        });
+
+
+                        ///add to their users_matched_with list
+                        ParseQuery<ParseObject> add_to_their_matches = ParseQuery.getQuery("Profile");
+                        //add_to_their_matches.getInBackground(final_list.get(final_list.size() - 1).toString(), new GetCallback<ParseObject>() {
+                        add_to_their_matches.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
+                            public void done(ParseObject their_profile, ParseException e) {
+                                if (e == null) {
+                                    //their_profile.addUnique("users_matched_with", ParseUser.getCurrentUser().get("profile_object_id").toString());
+                                    their_profile.addUnique("users_matched_with", "users_matched_with working");
+                                } else {
+                                    System.out.println("fail");
+                                }
+                            }
+                        });
+                    }
                 } else {
-                    //Log.d("score", "Error: " + e.getMessage());
+                    System.out.println("FAIL");
                 }
             }
         });
 
-
         final_list.remove(final_list.size() - 1);
         final_list.trimToSize();
-
-
     }
 
     public void get_data(View view) {
@@ -198,8 +229,10 @@ public class Swipe extends Activity {
                     if (e == null) {
                         System.out.println("PULLING PROFILE");
                         //Set Name
-                        String name = object.getString("name");
-                        swipe_name.setText(name);
+                        String first_name = object.getString("first_name");
+                        String last_name = object.getString("first_name");
+                        String full_name = first_name + " " + last_name;
+                        swipe_name.setText(full_name);
 
                         //Set profile picture
                         ParseFile image = object.getParseFile("profile_picture");
