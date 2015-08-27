@@ -146,7 +146,7 @@ public class Swipe extends ActionBarActivity {
 
                     ParseQuery<ParseObject> users_list_query = ParseQuery.getQuery("Profile");
 
-                    //users_list_query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
+                    //users_list_query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain").toString());
                     users_list_query.whereEqualTo("email_domain", "hotmail");
 
                     /*
