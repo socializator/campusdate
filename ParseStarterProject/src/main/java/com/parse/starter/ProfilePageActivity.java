@@ -64,7 +64,7 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         //String currentUserObjectIdID = currentUser.getObjectId();
-        String currentUserObjectIdID = "r22mHwUeTu";
+        String currentUserObjectIdID = "115TKypy3w";
 
         ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
@@ -75,20 +75,20 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
                 if (e == null) {
 
                     firstNameEditText.setText(object.getString
-                            ("FirstName"), TextView.BufferType.EDITABLE);
+                            ("first_name"), TextView.BufferType.EDITABLE);
                     lastNameEditText.setText(object.getString
-                            ("LastName"), TextView.BufferType.EDITABLE);
+                            ("last_name"), TextView.BufferType.EDITABLE);
                     ageEditText.setText(object.getString
-                            ("Age"), TextView.BufferType.EDITABLE);
+                            ("age"), TextView.BufferType.EDITABLE);
                     majorEditText.setText(object.getString
-                            ("Major"), TextView.BufferType.EDITABLE);
+                            ("major"), TextView.BufferType.EDITABLE);
                     whatsupEditText.setText(object.getString
-                            ("WhatsUp"), TextView.BufferType.EDITABLE);
+                            ("whats_up"), TextView.BufferType.EDITABLE);
 
-                    genderSpinner.setSelection(adapter.getPosition(object.getString("Gender")));
+                    genderSpinner.setSelection(adapter.getPosition(object.getString("gender")));
 
-                    boolean maleChecked = object.getBoolean("InterestInMale");
-                    boolean femaleChecked = object.getBoolean("InterestInFemale");
+                    boolean maleChecked = object.getBoolean("interested_in_male");
+                    boolean femaleChecked = object.getBoolean("interested_in_female");
 
                     if (maleChecked == true) {
                         maleInterestCheckBox.setChecked(true);
@@ -117,7 +117,7 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
                 //get Current user's objectId
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 //String currentUserObjectIdID = currentUser.getObjectId();
-                String currentUserObjectIdID = "r22mHwUeTu";
+                String currentUserObjectIdID = "115TKypy3w";
 
                 ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
@@ -146,22 +146,23 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
                             // Now let's update it with some new data. In this case, only cheatMode and score
                             // will get sent to the Parse Cloud. playerName hasn't changed
                             //if (firstName != null) {
-                            profile.put("FirstName", firstName);
-                            profile.put("LastName", lastName);
-                            profile.put("Age", age);
-                            profile.put("Major", major);
-                            profile.put("WhatsUp", whatsup);
+                            profile.put("first_name", firstName);
+                            profile.put("last_name", lastName);
+                            profile.put("age", age);
+                            profile.put("major", major);
+                            profile.put("whats_up", whatsup);
 
-                            profile.put("Gender", gender);
+                            profile.put("gender", gender);
 
-                            profile.put("InterestInMale", maleInterest);
-                            profile.put("InterestInFemale", femaleInterest);
+                            profile.put("interested_in_male", maleInterest);
+                            profile.put("interested_in_female", femaleInterest);
 
                             profile.saveInBackground();
+
                             System.out.println("Success");
 
                         } else {
-                            System.out.println("fail");
+                            System.out.println("Fail");
                         }
                     }
                 });
