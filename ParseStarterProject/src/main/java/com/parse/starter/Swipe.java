@@ -72,21 +72,22 @@ public class Swipe extends Activity {
         users_seen_query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
+                    boolean interested_in_females = object.getBoolean("interested_in_females");
+                    boolean interested_in_males = object.getBoolean("interested_in_males");
                     for (Object s : object.getList("users_seen")) {
                         seen_list.add(s.toString());
                     }
 
                     ParseQuery<ParseObject> users_list_query = ParseQuery.getQuery("Profile");
                     users_list_query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
-
-//                    if ((boolean)ParseUser.getCurrentUser().get("interested_in_females") == true) {
-//                        users_list_query.whereEqualTo("gender", "female");
-//                    }
-//                    if ((boolean)ParseUser.getCurrentUser().get("interested_in_males") == true) {
-//                        users_list_query.whereEqualTo("gender", "male");
-//                    }
-
-                    users_list_query.whereEqualTo("gender", "female");
+                    //show only females
+                    if (interested_in_females == true && interested_in_males == false) {
+                        users_list_query.whereEqualTo("gender", "female");
+                    }
+                    //show only males
+                    else if (interested_in_females == false && interested_in_males == true) {
+                        users_list_query.whereEqualTo("gender", "female");
+                    }
 
                     users_list_query.whereNotContainedIn("objectId", seen_list);
                     users_list_query.whereNotEqualTo("objectId", ParseUser.getCurrentUser().getObjectId());
