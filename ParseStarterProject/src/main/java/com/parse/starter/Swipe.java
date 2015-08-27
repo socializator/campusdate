@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -17,6 +16,7 @@ import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +89,10 @@ public class Swipe extends ActionBarActivity {
     }
 
     public void like_user(View view) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
-        //query.getInBackground(ParseUser.getCurrentUser().get("profile_object_id").toString(), new GetCallback<ParseObject>() {
-        query.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
+        ParseQuery<ParseObject> update_user_arrays_query = ParseQuery.getQuery("Profile");
+        //update_user_arrays_query.whereEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId().toString());
+        update_user_arrays_query.whereEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId().toString());
+        update_user_arrays_query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject user_seen, ParseException e) {
                 if (e == null) {
 
@@ -101,12 +102,29 @@ public class Swipe extends ActionBarActivity {
                     user_seen.addUnique("users_seen", "yooooo2");
 
                     user_seen.saveInBackground();
-
-                    final_list.remove(final_list.size() - 1);
-                    final_list.trimToSize();
                 }
             }
         });
+
+
+        //Create match if mutual like
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+        query.whereEqualTo("playerName", "Dan Stemkoski");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> scoreList, ParseException e) {
+                if (e == null) {
+                    //Log.d("score", "Retrieved " + scoreList.size() + " scores");
+                } else {
+                    //Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+
+        final_list.remove(final_list.size() - 1);
+        final_list.trimToSize();
+
+
     }
 
     public void get_data(View view) {
@@ -116,7 +134,7 @@ public class Swipe extends ActionBarActivity {
 
         ParseQuery<ParseObject> users_seen_query = ParseQuery.getQuery("Profile");
 
-        //users_seen_query.whereEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
+        //users_seen_query.whereEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId().toString());
         users_seen_query.whereEqualTo("user_object_id", "r22mHwUeTu");
 
         users_seen_query.getFirstInBackground(new GetCallback<ParseObject>() {
@@ -126,33 +144,32 @@ public class Swipe extends ActionBarActivity {
                         seen_list.add(s.toString());
                     }
 
-                    //ParseQuery<ParseUser> users_list_query = ParseUser.getQuery();
                     ParseQuery<ParseObject> users_list_query = ParseQuery.getQuery("Profile");
 
                     //users_list_query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
                     users_list_query.whereEqualTo("email_domain", "hotmail");
 
                     /*
-                    if (ParseUser.getCurrentUser().get("intrested_in_females") == true) {
+                    if ((boolean)ParseUser.getCurrentUser().get("interested_in_females") == true) {
                         users_list_query.whereEqualTo("gender", "female");
-
                     }
-                    if (ParseUser.getCurrentUser().get("intrested_in_males") == true) {
-
+                    if ((boolean)ParseUser.getCurrentUser().get("interested_in_males") == true) {
                         users_list_query.whereEqualTo("gender", "male");
                     }
                     */
-                    users_list_query.whereEqualTo("gender", "male");
+
+                    users_list_query.whereEqualTo("gender", "female");
 
                     users_list_query.whereNotContainedIn("user_object_id", seen_list);
 
-                    //users_list_query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
+                    //users_list_query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId().toString());
+                    users_list_query.whereNotEqualTo("user_object_id", "r22mHwUeTu");
 
                     users_list_query.findInBackground(new FindCallback<ParseObject>() {
-                        public void done(List<ParseObject> userlist, ParseException e) {
+                        public void done(List<ParseObject> user_list, ParseException e) {
                             if (e == null) {
-                                for (ParseObject s : userlist) {
-                                    result_list.add(s.getObjectId());
+                                for (ParseObject s : user_list) {
+                                    result_list.add(s.getObjectId().toString());
                                 }
                                 for (String s : result_list) {
                                     final_list = result_list;
@@ -176,11 +193,11 @@ public class Swipe extends ActionBarActivity {
 
         if (final_list.size() > 0) {
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
-            //query.whereEqualTo("objectId" , final_list.get(0))
             query.getInBackground(final_list.get(final_list.size() - 1), new GetCallback<ParseObject>() {
                 public void done(ParseObject object, ParseException e) {
                     if (e == null) {
-                        // object will be your game score
+                        System.out.println("PULLING PROFILE");
+                        //Set Name
                         String name = object.getString("name");
                         swipe_name.setText(name);
 
@@ -193,6 +210,7 @@ public class Swipe extends ActionBarActivity {
                             }
                         });
                     } else {
+                        System.out.println("FAILLLL");
                     }
                 }
             });
