@@ -100,14 +100,6 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     //if object == null
-                    if (object == null) {
-                        ParseObject obj = new ParseObject("Profile");
-                        obj.put("user_object_id", currentUserObjectIdID);
-                        obj.saveInBackground();
-                        currentUser.put("profile_object_id", obj.getObjectId());
-                        currentUser.put("firsttime", false);
-                        currentUser.saveInBackground();
-                    }
 
                     //get profile picture
                     ParseFile image = object.getParseFile("profile_picture");
