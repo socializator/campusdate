@@ -86,8 +86,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
         /************* Retrieve Data From Parse Database *************/
         ParseUser currentUser = ParseUser.getCurrentUser();
-        //String currentUserObjectIdID = currentUser.getObjectId();
-        String currentUserObjectIdID = "r22mHwUeTu";
+        final String currentUserObjectIdID = currentUser.getObjectId();
+        //String currentUserObjectIdID = "r22mHwUeTu";
 
         //ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
@@ -98,6 +98,11 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
+                    //if object == null
+                    if(object ==null){
+                        ParseObject obj = new ParseObject("Profile");
+                        obj.put("user_object_id", currentUserObjectIdID);
+                    }
 
                     //get profile picture
                     ParseFile image = object.getParseFile("profile_picture");
@@ -163,8 +168,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
                 //get Current user's objectId
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                //String currentUserObjectIdID = currentUser.getObjectId();
-                String currentUserObjectIdID = "r22mHwUeTu";
+                String currentUserObjectIdID = currentUser.getObjectId();
+                //String currentUserObjectIdID = "r22mHwUeTu";
 
                 //ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
