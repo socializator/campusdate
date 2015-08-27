@@ -31,6 +31,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.net.URI;
 
@@ -199,8 +200,12 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                         if (e == null) {
                             // Now let's update it with some new data. In this case, only cheatMode and score
                             // will get sent to the Parse Cloud. playerName hasn't changed
+                            Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
-                            byte[] image = "Working at Parse is great!".getBytes();
+                            byte[] image = stream.toByteArray();
+
                             ParseFile file = new ParseFile(photoPath,image);
 
                             file.saveInBackground();
@@ -245,12 +250,6 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                 photoPath = getRealPathFromURI(targetUri);
 
 
-                //ParseUser currentUser = ParseUser.getCurrentUser();
-                //String currentUserObjectIdID = currentUser.getObjectId();
-                //String currentUserObjectIdID = "r22mHwUeTu";
-                //ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
-                //query.whereEqualTo("user_object_id", currentUserObjectIdID);
-                //query.getFirst().put("profile_picture", file);
 
             }catch (FileNotFoundException e) {
                 e.printStackTrace();
