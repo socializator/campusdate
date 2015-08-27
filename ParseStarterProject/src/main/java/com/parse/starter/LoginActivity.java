@@ -3,6 +3,7 @@ package com.parse.starter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,7 +42,12 @@ public class LoginActivity extends Activity {
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     public void done(ParseUser user, com.parse.ParseException e) {
                         if (user != null) {
-                            gotoSwipe();
+                            if(user.getBoolean("firsttime")){
+                                gotoProfile();
+                            }
+                            else {
+                                gotoSwipe();
+                            }
                         } else {
                             Toast.makeText(getApplicationContext(),
                                     "Wrong username/password combo",
@@ -89,6 +95,11 @@ public class LoginActivity extends Activity {
 
     private void gotoSignup() {
         Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+    private void gotoProfile() {
+        Intent intent = new Intent(this, ProfilePageActivity.class);
         startActivity(intent);
     }
 }
