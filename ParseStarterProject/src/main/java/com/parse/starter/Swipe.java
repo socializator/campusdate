@@ -206,7 +206,13 @@ public class Swipe extends Activity {
                             query.getFirstInBackground(new GetCallback<ParseObject>() {
                                 public void done(ParseObject object, ParseException e) {
                                     if (e == null) {
-                                        object.addUnique("users_matched_with", final_list.get(final_list.size() - 1).toString());
+                                        if (final_list.isEmpty()) {
+                                            Toast.makeText(getApplicationContext(), "NO MORE USER", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            object.addUnique("users_matched_with", final_list.get(final_list.size() - 1).toString());
+                                        }
+
+
                                     } else {
                                         //error
                                     }
