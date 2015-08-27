@@ -10,11 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -22,6 +26,8 @@ import com.parse.ParseUser;
 
 public class ProfilePageActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
+
+    protected ImageButton profilePhotoImageButton;
 
     protected EditText firstNameEditText;
     protected EditText lastNameEditText;
@@ -39,6 +45,8 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
+
+
 
         // /Spinner
         genderSpinner = (Spinner) findViewById(R.id.genderSpinnerProfile);
@@ -62,17 +70,30 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
         //save button
         saveButton = (Button) findViewById(R.id.saveButtonProfile);
 
+
+        /************* Retrieve Data From Parse Database *************/
         ParseUser currentUser = ParseUser.getCurrentUser();
         //String currentUserObjectIdID = currentUser.getObjectId();
         String currentUserObjectIdID = "115TKypy3w";
 
         ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
+
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
         query.whereEqualTo("Me", obj);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
+
+                    ParseFile image = object.getParseFile("profile_picture");
+                    final ParseImageView imageView = (ParseImageView) findViewById(R.id.profile_photo);
+                    imageView.setParseFile(image);
+                    imageView.loadInBackground(new GetDataCallback() {
+                        public void done(byte[] data, ParseException e) {
+                        }
+                    });
+
 
                     firstNameEditText.setText(object.getString
                             ("first_name"), TextView.BufferType.EDITABLE);
@@ -109,6 +130,8 @@ public class ProfilePageActivity extends ActionBarActivity implements AdapterVie
         });
 
 
+
+        /************* Save Data to Parse Database *************/
         //Listen to save button click
         saveButton.setOnClickListener(new View.OnClickListener() {
 
