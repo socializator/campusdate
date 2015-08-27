@@ -114,8 +114,8 @@ public class Swipe extends ActionBarActivity {
             public void done(List<ParseObject> users_they_like, ParseException e) {
                 if (e == null) {
 
-
-                    if (users_they_like.contains(ParseUser.getCurrentUser().get("profile_object_id").toString())) {
+                    //if (users_they_like.contains(ParseUser.getCurrentUser().get("profile_object_id").toString())) {
+                    if (users_they_like.contains("like you")) {
 
 
                         //create a match
@@ -229,8 +229,10 @@ public class Swipe extends ActionBarActivity {
                     if (e == null) {
                         System.out.println("PULLING PROFILE");
                         //Set Name
-                        String name = object.getString("name");
-                        swipe_name.setText(name);
+                        String first_name = object.getString("first_name");
+                        String last_name = object.getString("first_name");
+                        String full_name = first_name + " " + last_name;
+                        swipe_name.setText(full_name);
 
                         //Set profile picture
                         ParseFile image = object.getParseFile("profile_picture");
