@@ -1,5 +1,6 @@
 package com.parse.starter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -34,7 +35,7 @@ import java.io.FileNotFoundException;
 import java.net.URI;
 
 
-public class ProfilePageActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+public class ProfilePageActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
 
     protected ParseImageView parseImageView;

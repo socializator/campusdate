@@ -176,7 +176,7 @@ public class Swipe extends Activity {
                         user_seen.addUnique("users_seen", (final_list.get(final_list.size() - 1)).toString());
                         user_seen.addUnique("users_like", (final_list.get(final_list.size() - 1)).toString());
                         user_seen.saveInBackground();
-                        checkmatch();
+                        check_match();
                         final_list.remove(final_list.size() - 1);
                         final_list.trimToSize();
                         view_profiles();
@@ -188,7 +188,7 @@ public class Swipe extends Activity {
         });
     }
 
-    public void checkmatch() {
+    public void check_match() {
         //Create match if mutual like
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
         query.whereEqualTo("objectId", final_list.get(final_list.size() - 1).toString());

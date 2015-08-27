@@ -62,6 +62,8 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         }
     }
     private void checkInputFields(){
+        String email_s = username.substring(username.length() - 3);
+        email_s.replaceAll("\\s+","");
         if(isEmpty(username)) {
             alertMsg("Sign Up Failed", "Please Enter an Email Address");
         }
@@ -77,7 +79,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         else if (!(firstname.matches("[a-zA-Z]+")) || !(lastname.matches("[a-zA-Z]+"))) {
             alertMsg("Sign Up Failed", "Please only enter letters for names.");
         }
-        else if(username.substring(username.length() - 3)!="edu"){
+        else if(!email_s.equals("edu")){
             alertMsg("Sign Up Failed", "Please enter a valid College Email Address.");
         }
         else {
