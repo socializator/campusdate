@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import com.parse.starter.R;
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
@@ -93,19 +94,18 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         //ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
 
-
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
         query.whereEqualTo("user_object_id", currentUserObjectIdID);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     //if object == null
-                    if(object ==null){
+                    if (object == null) {
                         ParseObject obj = new ParseObject("Profile");
                         obj.put("user_object_id", currentUserObjectIdID);
                         obj.saveInBackground();
-                        currentUser.put("profile_object_id",obj.getObjectId());
-                        currentUser.put("firsttime",false);
+                        currentUser.put("profile_object_id", obj.getObjectId());
+                        currentUser.put("firsttime", false);
                         currentUser.saveInBackground();
                     }
 
@@ -155,14 +155,13 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         /********** Upload an image to Parse Database **********/
 
 
-        parseImageView.setOnClickListener(new View.OnClickListener(){
-            public  void onClick(View view){
+        parseImageView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
             }
         });
-
 
 
         /************* Save Data to Parse Database *************/
@@ -199,12 +198,11 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                     Boolean femaleInterest = femaleInterestCheckBox.isChecked();
 
 
-
                     public void done(ParseObject profile, ParseException e) {
                         if (e == null) {
                             // Now let's update it with some new data. In this case, only cheatMode and score
                             // will get sent to the Parse Cloud. playerName hasn't changed
-                            Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
+                            /*Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
@@ -213,7 +211,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                             ParseFile file = new ParseFile(photoPath,image);
 
                             file.saveInBackground();
-                            profile.put("profile_picture", file);
+                            profile.put("profile_picture", file);*/
 
 
                             profile.put("first_name", firstName);
@@ -240,6 +238,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -248,14 +247,13 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
             Uri targetUri = data.getData();
             //photoPath = getRealPathFromURI(targetUri);
             Bitmap bitmap;
-            try{
+            try {
                 bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
                 parseImageView.setImageBitmap(bitmap);
                 photoPath = getRealPathFromURI(targetUri);
 
 
-
-            }catch (FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
