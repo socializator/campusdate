@@ -200,6 +200,7 @@ public class Swipe extends Activity {
                     for (Object s : object.getList("users_like")) {
                         if (s.toString().equals(me)) {
                             object.addUnique("users_matched_with", me);
+                            object.saveInBackground();
                             // add you to my list
                             ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
                             query.whereEqualTo("objectId", me);
@@ -210,6 +211,7 @@ public class Swipe extends Activity {
                                             Toast.makeText(getApplicationContext(), "NO MORE USER", Toast.LENGTH_SHORT).show();
                                         } else {
                                             object.addUnique("users_matched_with", final_list.get(final_list.size() - 1).toString());
+                                            object.saveInBackground();
                                         }
 
 
