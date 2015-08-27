@@ -1,8 +1,8 @@
 package com.parse.starter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +21,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Swipe extends ActionBarActivity {
+public class Swipe extends Activity {
 
     ArrayList<String> final_list = new ArrayList<String>();
 
@@ -59,7 +59,7 @@ public class Swipe extends ActionBarActivity {
     }
 
     public void go_to_matches(View view) {
-        Intent intent = new Intent(this, Matches.class);
+        Intent intent = new Intent(this, MatchActivity.class);
         startActivity(intent);
     }
 

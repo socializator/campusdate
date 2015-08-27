@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.parse.starter.SignUpActivity">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/signup_textFields"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Sign Up"
+            android:textColor="@color/sinch_purple"
+            android:layout_marginTop="30dp"
+            android:id="@+id/textViewHeader"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="College Email Address"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/sinch_purple"
+            android:layout_marginTop="20dp"
+            android:id="@+id/signup_username"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:id="@+id/signup_password"
+            android:textColor="@color/sinch_purple"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm Password"
+            android:id="@+id/signup_password2"
+            android:textColor="@color/sinch_purple"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="FirstName"
+            android:textColor="@color/sinch_purple"
+            android:layout_marginTop="10dp"
+            android:id="@+id/signup_firstname"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="LastName"
+            android:textColor="@color/sinch_purple"
+            android:layout_marginTop="10dp"
+            android:id="@+id/signup_lastname"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                android:id="@+id/button_confirm" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Cancel"
+                android:id="@+id/button_cancel"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
+
+

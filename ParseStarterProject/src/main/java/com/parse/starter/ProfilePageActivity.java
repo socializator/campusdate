@@ -1,7 +1,7 @@
 package com.parse.starter;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +24,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 
-public class ProfilePageActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+public class ProfilePageActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
 
     protected ImageButton profilePhotoImageButton;

@@ -24,10 +24,13 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
-    <string name="title_activity_matches">Matches</string>
     <string name="title_activity_swipe">Swipe</string>
     <string name="dislike">Dislike</string>
     <string name="like">Like</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_sign_up">SignUp</string>
+    <string name="title_activity_match">Match</string>
+    <string name="title_activity_messaging">MessagingActivity</string>
 
 
 </resources>
