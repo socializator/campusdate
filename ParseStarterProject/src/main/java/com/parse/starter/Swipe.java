@@ -90,16 +90,16 @@ public class Swipe extends ActionBarActivity {
 
     public void like_user(View view) {
         ParseQuery<ParseObject> update_user_arrays_query = ParseQuery.getQuery("Profile");
-        //update_user_arrays_query.whereEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId().toString());
-        update_user_arrays_query.whereEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId().toString());
-        update_user_arrays_query.getFirstInBackground(new GetCallback<ParseObject>() {
+        //update_user_arrays_query.getInBackground(ParseUser.getCurrentUser().get("profile_object_id").toString(), new GetCallback<ParseObject>() {
+        update_user_arrays_query.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
             public void done(ParseObject user_seen, ParseException e) {
                 if (e == null) {
 
-                    //user_seen.addUnique("users_like", final_list.get(final_list.size() - 1));
-                    //user_seen.addUnique("users_seen", final_list.get(final_list.size() - 1));
-                    user_seen.addUnique("users_like", "yooooo2");
-                    user_seen.addUnique("users_seen", "yooooo2");
+                    //user_seen.addUnique("users_seen", (final_list.get(final_list.size() - 1)).toString());
+                    //user_seen.addUnique("users_like", (final_list.get(final_list.size() - 1)).toString());
+
+                    user_seen.addUnique("users_seen", "seen you");
+                    user_seen.addUnique("users_like", "like you");
 
                     user_seen.saveInBackground();
                 }
