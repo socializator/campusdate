@@ -86,7 +86,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
 
         /************* Retrieve Data From Parse Database *************/
-        ParseUser currentUser = ParseUser.getCurrentUser();
+        final ParseUser currentUser = ParseUser.getCurrentUser();
         final String currentUserObjectIdID = currentUser.getObjectId();
         //String currentUserObjectIdID = "r22mHwUeTu";
 
@@ -103,6 +103,10 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                     if(object ==null){
                         ParseObject obj = new ParseObject("Profile");
                         obj.put("user_object_id", currentUserObjectIdID);
+                        obj.saveInBackground();
+                        currentUser.put("profile_object_id",obj.getObjectId());
+                        currentUser.put("firsttime",false);
+                        currentUser.saveInBackground();
                     }
 
                     //get profile picture
