@@ -88,8 +88,8 @@ public class Swipe extends Activity {
 
                     users_list_query.whereEqualTo("gender", "female");
 
-                    users_list_query.whereNotContainedIn("user_object_id", seen_list);
-                    users_list_query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
+                    users_list_query.whereNotContainedIn("objectId", seen_list);
+                    users_list_query.whereNotEqualTo("objectId", ParseUser.getCurrentUser().getObjectId());
                     users_list_query.findInBackground(new FindCallback<ParseObject>() {
                         public void done(List<ParseObject> user_list, ParseException e) {
                             if (e == null) {
@@ -200,13 +200,21 @@ public class Swipe extends Activity {
                     for (Object s : object.getList("users_like")) {
                         if (s.toString().equals(me)) {
                             object.addUnique("users_matched_with", me);
+                            object.saveInBackground();
                             // add you to my list
                             ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
                             query.whereEqualTo("objectId", me);
                             query.getFirstInBackground(new GetCallback<ParseObject>() {
                                 public void done(ParseObject object, ParseException e) {
                                     if (e == null) {
-                                        object.addUnique("users_matched_with", final_list.get(final_list.size() - 1).toString());
+                                        if (final_list.isEmpty()) {
+                                            Toast.makeText(getApplicationContext(), "NO MORE USER", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            object.addUnique("users_matched_with", final_list.get(final_list.size() - 1).toString());
+                                            object.saveInBackground();
+                                        }
+
+
                                     } else {
                                         //error
                                     }
