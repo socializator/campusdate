@@ -76,8 +76,8 @@ public class Swipe extends ActionBarActivity {
             public void done(ParseObject user_seen, ParseException e) {
                 if (e == null) {
 
-                    //user_seen.addUnique("users_seen", final_list.get(final_list.size() - 1));
-                    user_seen.addUnique("users_seen", "yooooo2");
+                    //user_seen.addUnique("users_seen", (final_list.get(final_list.size() - 1).toString()));
+                    user_seen.addUnique("users_seen", "seen you");
 
                     user_seen.saveInBackground();
 
