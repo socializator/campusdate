@@ -48,13 +48,13 @@
             android:id="@+id/swipe_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="" />
 
         <TextView
             android:id="@+id/swipe_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bob Smith"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
