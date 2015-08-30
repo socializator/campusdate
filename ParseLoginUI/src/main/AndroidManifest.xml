@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     ~ Copyright (c) 2014, Parse, LLC. All rights reserved.
     ~
     ~ You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -19,5 +18,6 @@
     ~ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     -->
 <manifest package="com.parse.ui">
+
     <application />
 </manifest>

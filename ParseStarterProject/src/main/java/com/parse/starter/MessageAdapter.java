@@ -8,11 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.parse.GetCallback;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.sinch.android.rtc.messaging.WritableMessage;
-import com.parse.ParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +77,7 @@ public class MessageAdapter extends BaseAdapter {
         TextView txtMessage = (TextView) convertView.findViewById(R.id.txtMessage);
         txtMessage.setText(message.getTextBody());
 
-        TextView txtDate= (TextView) convertView.findViewById(R.id.txtDate);
+        TextView txtDate = (TextView) convertView.findViewById(R.id.txtDate);
         txtDate.setText(message.getHeaders().get("date"));
 
         return convertView;

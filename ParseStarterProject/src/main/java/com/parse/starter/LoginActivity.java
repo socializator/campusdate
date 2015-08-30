@@ -3,7 +3,6 @@ package com.parse.starter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,10 +41,9 @@ public class LoginActivity extends Activity {
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     public void done(ParseUser user, com.parse.ParseException e) {
                         if (user != null) {
-                            if(user.getBoolean("firsttime")){
+                            if (user.getBoolean("firsttime")) {
                                 gotoProfile();
-                            }
-                            else {
+                            } else {
                                 gotoSwipe();
                             }
                         } else {

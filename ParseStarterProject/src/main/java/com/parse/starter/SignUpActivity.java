@@ -10,32 +10,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
-
-import java.util.Date;
-import java.util.Random;
 
 public class SignUpActivity extends Activity implements View.OnClickListener {
 
+    protected ProgressDialog proDialog;
     Button cancelButton;
     Button confirmButton;
-
     String username;
     String password1;
     String password2;
     String firstname;
     String lastname;
-
     boolean finishTag = false;
-
-    protected ProgressDialog proDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,40 +40,35 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        username = ((EditText)findViewById(R.id.signup_username)).getText().toString().toLowerCase();
+        username = ((EditText) findViewById(R.id.signup_username)).getText().toString().toLowerCase();
         password1 = ((EditText) findViewById(R.id.signup_password)).getText().toString();
         password2 = ((EditText) findViewById(R.id.signup_password2)).getText().toString();
-        firstname = ((EditText)findViewById(R.id.signup_firstname)).getText().toString();
-        lastname = ((EditText)findViewById(R.id.signup_lastname)).getText().toString();
+        firstname = ((EditText) findViewById(R.id.signup_firstname)).getText().toString();
+        lastname = ((EditText) findViewById(R.id.signup_lastname)).getText().toString();
 
-        if(findViewById(R.id.button_cancel).equals(view)) {
+        if (findViewById(R.id.button_cancel).equals(view)) {
             finish();
-        }else{
+        } else {
             checkInputFields();
         }
     }
-    private void checkInputFields(){
+
+    private void checkInputFields() {
         String email_s = username.substring(username.length() - 3);
-        email_s.replaceAll("\\s+","");
-        if(isEmpty(username)) {
+        email_s.replaceAll("\\s+", "");
+        if (isEmpty(username)) {
             alertMsg("Sign Up Failed", "Please Enter an Email Address");
-        }
-        else if(isEmpty(password1)||isEmpty(password2)){
+        } else if (isEmpty(password1) || isEmpty(password2)) {
             alertMsg("Sign Up Failed", "Please Enter Password");
-        }
-        else if(!password1.equals(password2)) {
+        } else if (!password1.equals(password2)) {
             alertMsg("Sign Up Failed", "The passwords do not match");
-        }
-        else if (isEmpty(firstname)||isEmpty(lastname)){
+        } else if (isEmpty(firstname) || isEmpty(lastname)) {
             alertMsg("Sign Up Failed", "Please Enter Firstname or Lastname");
-        }
-        else if (!(firstname.matches("[a-zA-Z]+")) || !(lastname.matches("[a-zA-Z]+"))) {
+        } else if (!(firstname.matches("[a-zA-Z]+")) || !(lastname.matches("[a-zA-Z]+"))) {
             alertMsg("Sign Up Failed", "Please only enter letters for names.");
-        }
-        else if(!email_s.equals("edu")){
+        } else if (!email_s.equals("edu")) {
             alertMsg("Sign Up Failed", "Please enter a valid College Email Address.");
-        }
-        else {
+        } else {
             processSignup();
         }
     }
@@ -140,12 +126,13 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
 
     /**
      * show an alert message on current activity.
+     *
      * @param title
      * @param msg
      */
-    protected void alertMsg(String title, String msg){
+    protected void alertMsg(String title, String msg) {
         //build dialog
-        AlertDialog.Builder builder= new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
         builder.setMessage(msg);
         builder.setPositiveButton("OK",
@@ -153,7 +140,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int id) {
                         //clear msg
                         clearAlltext();
-                        if(finishTag){
+                        if (finishTag) {
                             finish();
                         }
                     }
