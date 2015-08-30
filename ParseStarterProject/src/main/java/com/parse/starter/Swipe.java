@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,23 @@ public class Swipe extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe3);
         get_data();
+
+        LinearLayout image_layout = (LinearLayout) findViewById(R.id.image_layout);
+        image_layout.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeLeft() {
+                dislike_user();
+                System.out.println("SWIPE LEFT");
+            }
+
+            @Override
+            public void onSwipeRight() {
+                like_user();
+                System.out.println("SWIPE RIGHT");
+            }
+        });
+
+
     }
 
     @Override
@@ -144,7 +162,7 @@ public class Swipe extends Activity {
         }
     }
 
-    public void dislike_user(View view) {
+    public void dislike_user() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
         query.getInBackground(ParseUser.getCurrentUser().get("profile_object_id").toString(), new GetCallback<ParseObject>() {
             //query.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
@@ -165,7 +183,8 @@ public class Swipe extends Activity {
         });
     }
 
-    public void like_user(View view) {
+    public void like_user() {
+        System.out.println("LIKED USER");
         ParseQuery<ParseObject> update_user_arrays_query = ParseQuery.getQuery("Profile");
         update_user_arrays_query.getInBackground(ParseUser.getCurrentUser().getString("profile_object_id"), new GetCallback<ParseObject>() {
             //update_user_arrays_query.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
