@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Swipe extends Activity {
-
     ArrayList<String> final_list = new ArrayList<String>();
 
     @Override
@@ -31,13 +31,32 @@ public class Swipe extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe3);
         get_data();
+
+        LinearLayout image_layout = (LinearLayout) findViewById(R.id.image_layout);
+        image_layout.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeLeft() {
+                dislike_user();
+                System.out.println("SWIPE LEFT");
+            }
+
+            @Override
+            public void onSwipeRight() {
+                like_user();
+                System.out.println("SWIPE RIGHT");
+            }
+        });
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_swipe, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -48,20 +67,24 @@ public class Swipe extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+
     public void go_to_profile(View view) {
         Intent intent = new Intent(this, ProfilePageActivity.class);
         startActivity(intent);
     }
+
 
     public void go_to_matches(View view) {
         Intent intent = new Intent(this, MatchActivity.class);
         startActivity(intent);
     }
 
+
     public void go_to_swipe(View view) {
         Intent intent = new Intent(this, Swipe.class);
         startActivity(intent);
     }
+
 
     public void get_data() {
         final ArrayList<String> seen_list = new ArrayList<String>();
@@ -79,7 +102,9 @@ public class Swipe extends Activity {
                     }
 
                     ParseQuery<ParseObject> users_list_query = ParseQuery.getQuery("Profile");
+
                     users_list_query.whereEqualTo("email_domain", ParseUser.getCurrentUser().get("email_domain"));
+
                     //show only females
                     if (interested_in_females == true && interested_in_males == false) {
                         users_list_query.whereEqualTo("gender", "female");
@@ -111,6 +136,7 @@ public class Swipe extends Activity {
         });
     }
 
+
     public void view_profiles() {
         final TextView swipe_name = (TextView) findViewById(R.id.swipe_name);
 
@@ -120,6 +146,7 @@ public class Swipe extends Activity {
                 public void done(ParseObject object, ParseException e) {
                     if (e == null) {
                         System.out.println("PULLING PROFILE");
+
                         //Set Name
                         String first_name = object.getString("first_name");
                         String last_name = object.getString("first_name");
@@ -144,7 +171,8 @@ public class Swipe extends Activity {
         }
     }
 
-    public void dislike_user(View view) {
+
+    public void dislike_user() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
         query.getInBackground(ParseUser.getCurrentUser().get("profile_object_id").toString(), new GetCallback<ParseObject>() {
             //query.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
@@ -159,13 +187,14 @@ public class Swipe extends Activity {
                         final_list.trimToSize();
                         view_profiles();
                     }
-                    //user_seen.addUnique("users_seen", "seen you");
                 }
             }
         });
     }
 
-    public void like_user(View view) {
+
+    public void like_user() {
+        System.out.println("LIKED USER");
         ParseQuery<ParseObject> update_user_arrays_query = ParseQuery.getQuery("Profile");
         update_user_arrays_query.getInBackground(ParseUser.getCurrentUser().getString("profile_object_id"), new GetCallback<ParseObject>() {
             //update_user_arrays_query.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
@@ -182,12 +211,11 @@ public class Swipe extends Activity {
                         final_list.trimToSize();
                         view_profiles();
                     }
-                    //user_seen.addUnique("users_seen", "seen you");
-                    //user_seen.addUnique("users_like", "like you");
                 }
             }
         });
     }
+
 
     public void check_match() {
         //Create match if mutual like
@@ -202,6 +230,7 @@ public class Swipe extends Activity {
                         if (s.toString().equals(me)) {
                             object.addUnique("users_matched_with", me);
                             object.saveInBackground();
+
                             // add you to my list
                             ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
                             query.whereEqualTo("objectId", me);
@@ -214,8 +243,6 @@ public class Swipe extends Activity {
                                             object.addUnique("users_matched_with", final_list.get(final_list.size() - 1).toString());
                                             object.saveInBackground();
                                         }
-
-
                                     } else {
                                         //error
                                     }
@@ -229,53 +256,5 @@ public class Swipe extends Activity {
                 }
             }
         });
-
-
-//        query.findInBackground(new FindCallback<ParseObject>() {
-//            public void done(List<ParseObject> likelist, ParseException e) {
-//                if (e == null) {
-//                    otherguyslikelist =
-//                    //if (users_they_like.contains(ParseUser.getCurrentUser().get("profile_object_id").toString())) {
-//                    if (users_they_like.get()contains("like you")) {
-//
-//
-//                        //create a match
-//                        //add to my users_matched_with list
-//                        ParseQuery<ParseObject> add_to_my_matches = ParseQuery.getQuery("Profile");
-//                        //add_to_their_matches.getInBackground(ParseUser.getCurrentUser().get("profile_object_id").toString(), new GetCallback<ParseObject>() {
-//                        add_to_my_matches.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
-//                            public void done(ParseObject my_profile, ParseException e) {
-//                                if (e == null) {
-//                                    //my_profile.addUnique("users_matched_with", final_list.get(final_list.size() - 1).toString());
-//                                    my_profile.addUnique("users_matched_with", "users_matched_with working");
-//                                } else {
-//                                    System.out.println("fail");
-//                                }
-//                            }
-//                        });
-//
-//
-//                        ///add to their users_matched_with list
-//                        ParseQuery<ParseObject> add_to_their_matches = ParseQuery.getQuery("Profile");
-//                        //add_to_their_matches.getInBackground(final_list.get(final_list.size() - 1).toString(), new GetCallback<ParseObject>() {
-//                        add_to_their_matches.getInBackground("115TKypy3w", new GetCallback<ParseObject>() {
-//                            public void done(ParseObject their_profile, ParseException e) {
-//                                if (e == null) {
-//                                    //their_profile.addUnique("users_matched_with", ParseUser.getCurrentUser().get("profile_object_id").toString());
-//                                    their_profile.addUnique("users_matched_with", "users_matched_with working");
-//                                } else {
-//                                    System.out.println("fail");
-//                                }
-//                            }
-//                        });
-//                    }
-//                } else {
-//                    System.out.println("FAIL");
-//                }
-//            }
-//        });
     }
-
-
 }
-

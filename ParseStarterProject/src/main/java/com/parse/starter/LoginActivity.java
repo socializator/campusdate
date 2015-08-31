@@ -3,7 +3,6 @@ package com.parse.starter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,11 +41,16 @@ public class LoginActivity extends Activity {
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     public void done(ParseUser user, com.parse.ParseException e) {
                         if (user != null) {
-                            if(user.getBoolean("firsttime")){
+                            if (user.getBoolean("firsttime")) {
                                 gotoProfile();
+<<<<<<< HEAD
                             }
                             else {
                                 gotoMatch();
+=======
+                            } else {
+                                gotoSwipe();
+>>>>>>> 1487eb6133164c27930360b9750c4aa7da39bb93
                             }
                         } else {
                             Toast.makeText(getApplicationContext(),

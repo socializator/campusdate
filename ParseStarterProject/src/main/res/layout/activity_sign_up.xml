@@ -2,93 +2,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.parse.starter.SignUpActivity">
 
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:id="@+id/signup_textFields"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
+        android:paddingTop="@dimen/activity_vertical_margin">
+
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_gravity="center_horizontal"
             android:text="Sign Up"
-            android:textColor="@color/sinch_purple"
-            android:layout_marginTop="30dp"
-            android:id="@+id/textViewHeader"/>
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
+            android:id="@+id/signup_username"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="College Email Address"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/sinch_purple"
-            android:layout_marginTop="20dp"
-            android:id="@+id/signup_username"/>
+            android:hint="Student Email"
+            android:inputType="textEmailAddress" />
 
         <EditText
+            android:id="@+id/signup_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:id="@+id/signup_password"
-            android:textColor="@color/sinch_purple"
-            android:layout_marginTop="10dp"
             android:inputType="textPassword" />
 
         <EditText
+            android:id="@+id/signup_password2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
-            android:id="@+id/signup_password2"
-            android:textColor="@color/sinch_purple"
-            android:layout_marginTop="10dp"
             android:inputType="textPassword" />
 
         <EditText
+            android:id="@+id/signup_firstname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="FirstName"
-            android:textColor="@color/sinch_purple"
-            android:layout_marginTop="10dp"
-            android:id="@+id/signup_firstname"/>
+            android:hint="First Name" />
 
         <EditText
+            android:id="@+id/signup_lastname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="LastName"
-            android:textColor="@color/sinch_purple"
-            android:layout_marginTop="10dp"
-            android:id="@+id/signup_lastname"/>
+            android:hint="Last Name" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/button_confirm"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:background="#FF4081"
+            android:text="Confirm"
+            android:textColor="#fff" />
 
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Confirm"
-                android:id="@+id/button_confirm" />
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Cancel" />
 
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Cancel"
-                android:id="@+id/button_cancel"/>
-
-        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
 

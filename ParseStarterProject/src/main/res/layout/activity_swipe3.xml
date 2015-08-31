@@ -38,39 +38,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tabs"
-        android:orientation="horizontal"
-        android:id="@+id/buttons_layout">
-
-        <Button
-            android:id="@+id/swipe_dislike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="dislike_user"
-            android:text="@string/dislike"
-            android:background="#acff1d0b"
-            android:textColor="#ffffff" />
-
-        <Button
-            android:id="@+id/swipe_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="like_user"
-            android:text="@string/like"
-            android:textColor="#ffffff"
-            android:background="#a60052ff" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/image_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttons_layout"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/tabs">
 
         <TextView
             android:id="@+id/swipe_name"
@@ -82,8 +54,7 @@
         <com.parse.ParseImageView
             android:id="@+id/swipe_photo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>

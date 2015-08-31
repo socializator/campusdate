@@ -31,6 +31,11 @@
     <string name="title_activity_sign_up">SignUp</string>
     <string name="title_activity_match">Match</string>
     <string name="title_activity_messaging">MessagingActivity</string>
+    <string name="signup">Sign Up</string>
+    <string name="login">Log In</string>
+    <string name="password">Password</string>
+    <string name="studentemail">Student Email</string>
+    <string name="campusdate">Campusdate</string>
 
 
 </resources>
