@@ -328,5 +328,19 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         // Another interface callback
     }
 
+    public void go_to_profile(View view) {
+        //nothing
+    }
 
+
+    public void go_to_matches(View view) {
+        Intent intent = new Intent(this, MatchActivity.class);
+        startActivity(intent);
+    }
+
+
+    public void go_to_swipe(View view) {
+        Intent intent = new Intent(this, Swipe.class);
+        startActivity(intent);
+    }
 }

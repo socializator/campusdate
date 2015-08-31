@@ -81,8 +81,7 @@ public class Swipe extends Activity {
 
 
     public void go_to_swipe(View view) {
-        Intent intent = new Intent(this, Swipe.class);
-        startActivity(intent);
+       //nothing
     }
 
 

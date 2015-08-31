@@ -126,4 +126,21 @@ public class MatchActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void go_to_profile(View view) {
+        Intent intent = new Intent(this, ProfilePageActivity.class);
+        startActivity(intent);
+    }
+
+
+    public void go_to_matches(View view) {
+        //nothing
+    }
+
+
+    public void go_to_swipe(View view) {
+        Intent intent = new Intent(this, Swipe.class);
+        startActivity(intent);
+    }
+
 }
