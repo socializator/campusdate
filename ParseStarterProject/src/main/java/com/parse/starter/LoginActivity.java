@@ -46,14 +46,10 @@ public class LoginActivity extends Activity {
                         if (user != null) {
                             if (user.getBoolean("firsttime")) {
                                 gotoProfile();
-<<<<<<< HEAD
+
                             }
                             else {
                                 gotoMatch();
-=======
-                            } else {
-                                gotoSwipe();
->>>>>>> 1487eb6133164c27930360b9750c4aa7da39bb93
                             }
                         } else {
                             Toast.makeText(getApplicationContext(),
