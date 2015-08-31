@@ -93,8 +93,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
         /************* Retrieve Data From Parse Database *************/
         final ParseUser currentUser = ParseUser.getCurrentUser();
-        //final String currentUserObjectIdID = currentUser.getObjectId();
-        String currentUserObjectIdID = "r22mHwUeTu";
+        final String currentUserObjectIdID = currentUser.getObjectId();
+        //String currentUserObjectIdID = "r22mHwUeTu";
 
         //ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
@@ -169,9 +169,9 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
             public void onClick(View view) {
 
                 //get Current user's objectId
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                // currentUserObjectIdID = currentUser.getObjectId();
-                String currentUserObjectIdID = "r22mHwUeTu";
+                final ParseUser currentUser = ParseUser.getCurrentUser();
+                final String currentUserObjectIdID = currentUser.getObjectId();
+                //String currentUserObjectIdID = "r22mHwUeTu";
 
                 //ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
