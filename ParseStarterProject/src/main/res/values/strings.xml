@@ -36,6 +36,7 @@
     <string name="password">Password</string>
     <string name="studentemail">Student Email</string>
     <string name="campusdate">Campusdate</string>
+    <string name="title_activity_verify_email">VerifyEmailActivity</string>
 
 
 </resources>

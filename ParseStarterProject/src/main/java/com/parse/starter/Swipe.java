@@ -111,7 +111,7 @@ public class Swipe extends Activity {
                     }
                     //show only males
                     else if (interested_in_females == false && interested_in_males == true) {
-                        users_list_query.whereEqualTo("gender", "female");
+                        users_list_query.whereEqualTo("gender", "male");
                     }
 
                     users_list_query.whereNotContainedIn("objectId", seen_list);
@@ -149,9 +149,10 @@ public class Swipe extends Activity {
 
                         //Set Name
                         String first_name = object.getString("first_name");
-                        String last_name = object.getString("first_name");
+                        String last_name = object.getString("last_name");
                         String full_name = first_name + " " + last_name;
                         swipe_name.setText(full_name);
+                        System.out.println(full_name);
 
                         //Set profile picture
                         ParseFile image = object.getParseFile("profile_picture");
@@ -239,9 +240,12 @@ public class Swipe extends Activity {
                                     if (e == null) {
                                         if (final_list.isEmpty()) {
                                             Toast.makeText(getApplicationContext(), "NO MORE USER", Toast.LENGTH_SHORT).show();
+                                            //System.out.println("ADDING" + final_list.get(final_list.size() - 1).toString() + "to my list");
+
                                         } else {
                                             object.addUnique("users_matched_with", final_list.get(final_list.size() - 1).toString());
                                             object.saveInBackground();
+                                            System.out.println("ADDING" + final_list.get(final_list.size() - 1).toString() + "to my list");
                                         }
                                     } else {
                                         //error
