@@ -21,20 +21,24 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Sign Up"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
         <EditText
             android:id="@+id/signup_username"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Student Email"
             android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/signup_firstname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name" />
+
+        <EditText
+            android:id="@+id/signup_lastname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name" />
 
         <EditText
             android:id="@+id/signup_password"
@@ -49,18 +53,6 @@
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
             android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/signup_firstname"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="First Name" />
-
-        <EditText
-            android:id="@+id/signup_lastname"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="Last Name" />
 
         <Button
             android:id="@+id/button_confirm"

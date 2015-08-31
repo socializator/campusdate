@@ -1,5 +1,6 @@
 package com.parse.starter;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -32,6 +33,9 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        ActionBar ar = getActionBar();
+        //ar.setTitle("welcome");
         confirmButton = (Button) findViewById(R.id.button_confirm);
         confirmButton.setOnClickListener(this);
         cancelButton = (Button) findViewById(R.id.button_cancel);
