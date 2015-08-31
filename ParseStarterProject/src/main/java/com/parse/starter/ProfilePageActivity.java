@@ -16,8 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
@@ -28,14 +30,18 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 
 
 public class ProfilePageActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
-
+    /******************************
+     * XML Objects Declairation
+     ******************************/
     protected ParseImageView parseImageView;
     protected String photoPath;
+    protected Bitmap bitmap;
 
     protected EditText firstNameEditText;
     protected EditText lastNameEditText;
@@ -49,6 +55,11 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
     protected Button saveButton;
 
+    private static int RESULT_LOAD_IMG = 1;
+
+    /******************************
+     * onCreate
+     ******************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,8 +93,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
         /************* Retrieve Data From Parse Database *************/
         final ParseUser currentUser = ParseUser.getCurrentUser();
-        final String currentUserObjectIdID = currentUser.getObjectId();
-        //String currentUserObjectIdID = "r22mHwUeTu";
+        //final String currentUserObjectIdID = currentUser.getObjectId();
+        String currentUserObjectIdID = "r22mHwUeTu";
 
         //ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
@@ -143,11 +154,12 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
         parseImageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 0);
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
             }
         });
+
 
 
         /************* Save Data to Parse Database *************/
@@ -158,8 +170,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
                 //get Current user's objectId
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                String currentUserObjectIdID = currentUser.getObjectId();
-                //String currentUserObjectIdID = "r22mHwUeTu";
+                // currentUserObjectIdID = currentUser.getObjectId();
+                String currentUserObjectIdID = "r22mHwUeTu";
 
                 //ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
 
@@ -170,50 +182,38 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                 query.whereEqualTo("user_object_id", currentUserObjectIdID);
 
                 query.getFirstInBackground(new GetCallback<ParseObject>() {
-
-                    //create string to hold user input text
-                    String firstName = firstNameEditText.getText().toString();
-                    String lastName = lastNameEditText.getText().toString();
-                    String age = ageEditText.getText().toString();
-                    String major = majorEditText.getText().toString();
-                    String whatsup = whatsupEditText.getText().toString();
-
-                    String gender = genderSpinner.getSelectedItem().toString();
-
-                    Boolean maleInterest = maleInterestCheckBox.isChecked();
-                    Boolean femaleInterest = femaleInterestCheckBox.isChecked();
-
-
                     public void done(ParseObject profile, ParseException e) {
                         if (e == null) {
                             // Now let's update it with some new data. In this case, only cheatMode and score
                             // will get sent to the Parse Cloud. playerName hasn't changed
-                            /*Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
-                            byte[] image = stream.toByteArray();
+                            if(bitmap != null){
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
-                            ParseFile file = new ParseFile(photoPath,image);
+                                byte[] image = stream.toByteArray();
 
-                            file.saveInBackground();
-                            profile.put("profile_picture", file);*/
+                                ParseFile file = new ParseFile("prof_pic.jpg",image);
 
+                                file.saveInBackground();
 
-                            profile.put("first_name", firstName);
-                            profile.put("last_name", lastName);
-                            profile.put("age", age);
-                            profile.put("major", major);
-                            profile.put("whats_up", whatsup);
+                                profile.put("profile_picture", file);
+                            }
 
-                            profile.put("gender", gender);
-
-                            profile.put("interested_in_males", maleInterest);
-                            profile.put("interested_in_females", femaleInterest);
+                            profile.put("first_name", firstNameEditText.getText().toString());
+                            profile.put("last_name", lastNameEditText.getText().toString());
+                            profile.put("age", ageEditText.getText().toString());
+                            profile.put("major", majorEditText.getText().toString());
+                            profile.put("whats_up", whatsupEditText.getText().toString());
+                            profile.put("gender", genderSpinner.getSelectedItem().toString());
+                            profile.put("interested_in_males", maleInterestCheckBox.isChecked());
+                            profile.put("interested_in_females", femaleInterestCheckBox.isChecked());
 
                             profile.saveInBackground();
 
-                            System.out.println("\nSuccess");
+                            // Show a simple toast message
+                            Toast.makeText(ProfilePageActivity.this, "Profile Saved",
+                                    Toast.LENGTH_SHORT).show();
 
                         } else {
                             System.out.println("Fail");
@@ -225,27 +225,50 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         });
     }
 
+    /******************************
+     * onActivityResult
+     ******************************/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
-            Uri targetUri = data.getData();
-            //photoPath = getRealPathFromURI(targetUri);
-            Bitmap bitmap;
-            try {
-                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+        try {
+            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK &&  null != data) {
+                //get image from data
+                Uri targetUri = data.getData();
+
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+                // Get the cursor
+                Cursor cursor = getContentResolver().query(targetUri,
+                        filePathColumn, null, null, null);
+                // Move to first row
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                photoPath = cursor.getString(columnIndex);
+                cursor.close();
+
+                // Set the Image in ImageView after decoding the String
+                bitmap = BitmapFactory.decodeFile(photoPath);
                 parseImageView.setImageBitmap(bitmap);
-                photoPath = getRealPathFromURI(targetUri);
 
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            } else {
+                    Toast.makeText(this, "You haven't picked Image",
+                        Toast.LENGTH_LONG).show();
             }
+                //photoPath = getRealPathFromURI(targetUri);
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+                    .show();
         }
+
 
     }
 
+    /******************************
+     * getRealPathFromURI
+     ******************************/
     protected String getRealPathFromURI(Uri contentURI) {
         String result;
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
@@ -260,6 +283,9 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         return result;
     }
 
+    /******************************
+     * onCreateOptionsMenu
+     ******************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -267,6 +293,9 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         return true;
     }
 
+    /******************************
+     * onOptionsItemSelected
+     ******************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -282,11 +311,19 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         return super.onOptionsItemSelected(item);
     }
 
+
+    /******************************
+     * onItemSelected
+     ******************************/
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         parent.getItemAtPosition(pos);
     }
 
+
+    /******************************
+     * onNothingSelected
+     ******************************/
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
