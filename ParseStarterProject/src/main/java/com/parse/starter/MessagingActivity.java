@@ -1,5 +1,6 @@
 package com.parse.starter;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -46,6 +49,7 @@ public class MessagingActivity extends Activity {
         messagesList = (ListView) findViewById(R.id.listMessages);
         messageAdapter = new MessageAdapter(this);
         messagesList.setAdapter(messageAdapter);
+        actionBarSetup(recipientId);
         populateMessageHistory();
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -59,7 +63,7 @@ public class MessagingActivity extends Activity {
                         if (e == null) {
                             for (ParseObject o : list) {
                                 WritableMessage message = new WritableMessage(o.get("recipientId").toString(), o.get("messageText").toString());
-                                message.addHeader("date",currentTimeString(o.getCreatedAt()));
+                                message.addHeader("date", currentTimeString(o.getCreatedAt()));
                                 messageAdapter.addMessage(message, MessageAdapter.DIRECTION_INCOMING);
                                 o.put("new", false);
                                 o.saveInBackground();
@@ -83,12 +87,12 @@ public class MessagingActivity extends Activity {
 
     //get previous messages from parse & display
     private void populateMessageHistory() {
-        String[] userIds = {currentUserId, recipientId};
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseMessage");
-        query.whereContainedIn("senderId", Arrays.asList(userIds));
-        query.whereContainedIn("recipientId", Arrays.asList(userIds));
-        query.orderByAscending("createdAt");
-        query.findInBackground(new FindCallback<ParseObject>() {
+        final String[] userIds = {currentUserId, recipientId};
+        ParseQuery<ParseObject> message_query = ParseQuery.getQuery("ParseMessage");
+        message_query.whereContainedIn("senderId", Arrays.asList(userIds));
+        message_query.whereContainedIn("recipientId", Arrays.asList(userIds));
+        message_query.orderByAscending("createdAt");
+        message_query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> messageList, com.parse.ParseException e) {
                 if (e == null) {
@@ -96,7 +100,7 @@ public class MessagingActivity extends Activity {
                         messageList.get(i).put("new", false);
                         messageList.get(i).saveInBackground();
                         WritableMessage message = new WritableMessage(messageList.get(i).get("recipientId").toString(), messageList.get(i).get("messageText").toString());
-                        message.addHeader("date",currentTimeString(messageList.get(i).getCreatedAt()));
+                        message.addHeader("date", currentTimeString(messageList.get(i).getCreatedAt()));
                         if (messageList.get(i).get("senderId").toString().equals(currentUserId)) {
                             messageAdapter.addMessage(message, MessageAdapter.DIRECTION_OUTGOING);
                         } else {
@@ -113,8 +117,7 @@ public class MessagingActivity extends Activity {
         if (messageBody.isEmpty()) {
             Toast.makeText(this, "Please enter a message", Toast.LENGTH_LONG).show();
             return;
-        }
-        else {
+        } else {
             final WritableMessage writableMessage = new WritableMessage(recipientId, messageBody);
 
             //messageService.sendMessage(recipientId, messageBody);
@@ -127,7 +130,7 @@ public class MessagingActivity extends Activity {
             parseMessage.put("MessageId", writableMessage.getMessageId());
             parseMessage.saveInBackground();
 
-            writableMessage.addHeader("date",currentTimeString());
+            writableMessage.addHeader("date", currentTimeString());
             messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_OUTGOING);
             messageBodyField.setText("");
         }
@@ -135,14 +138,14 @@ public class MessagingActivity extends Activity {
 
     public String currentTimeString() {
         Date currentTime = new Date(System.currentTimeMillis());
-        SimpleDateFormat df =new SimpleDateFormat("MMM dd HH:mm a");
+        SimpleDateFormat df = new SimpleDateFormat("MMM dd HH:mm a");
         df.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
         return df.format(currentTime);
     }
 
     public String currentTimeString(Date date) {
         Date currentTime = date;
-        SimpleDateFormat df =new SimpleDateFormat("MMM dd HH:mm a");
+        SimpleDateFormat df = new SimpleDateFormat("MMM dd HH:mm a");
         df.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
         return df.format(currentTime);
     }
@@ -167,5 +170,23 @@ public class MessagingActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void actionBarSetup(String Id) {
+        final String [] result = new String[3];
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+        query.whereEqualTo("user_object_id", Id);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    result[0] = object.getString("first_name");
+                    result[1] = object.getString("last_name");
+                    result[2] = object.getString("whats_up");
+                    ActionBar ab = getActionBar();
+                    ab.setTitle(result[0] + " "+ result[1]);
+                    ab.setSubtitle(result[2]);
+                }
+            }
+        });
     }
 }

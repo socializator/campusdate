@@ -46,7 +46,7 @@ public class LoginActivity extends Activity {
                                 gotoProfile();
                             }
                             else {
-                                gotoSwipe();
+                                gotoMatch();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(),
@@ -88,8 +88,8 @@ public class LoginActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void gotoSwipe() {
-        Intent intent = new Intent(this, Swipe.class);
+    private void gotoMatch() {
+        Intent intent = new Intent(this, MatchActivity.class);
         startActivity(intent);
     }
 
