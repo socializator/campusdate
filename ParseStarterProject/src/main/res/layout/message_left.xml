@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/txtSender"
-            android:background="@drawable/grey_bubble">
+            android:background="@drawable/grey_bubble"
+            android:id="@+id/left_bubble">
 
             <TextView
                 android:id="@+id/txtMessage"

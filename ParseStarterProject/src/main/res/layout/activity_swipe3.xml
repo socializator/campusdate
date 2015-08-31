@@ -78,8 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:singleLine="false"
-            android:text="Pass"
-            android:textColor="#fff" />
+            android:text="Pass" />
 
         <Button
             android:id="@+id/like_button"
