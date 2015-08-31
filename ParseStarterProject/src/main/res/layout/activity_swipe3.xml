@@ -77,7 +77,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#F44336"
             android:singleLine="false"
             android:text="Pass"
             android:textColor="#fff" />
@@ -87,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#4CAF50"
+            android:background="#FF4081"
             android:text="Like"
             android:textColor="#fff" />
     </LinearLayout>
