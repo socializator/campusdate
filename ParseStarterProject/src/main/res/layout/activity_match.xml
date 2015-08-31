@@ -1,29 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context="com.parse.starter.MatchActivity">
 
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/dark_gray"
-        android:gravity="center_vertical|center_horizontal"
-        android:padding="15dp"
-        android:text="Logout"
-        android:textColor="@color/sinch_purple"
-        android:textSize="24sp" />
+        android:orientation="horizontal">
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/usersListView"
+        <Button
+            android:id="@+id/matches_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:onClick="go_to_matches"
+            android:text="@string/matches_tab"
+            android:textColor="#FF4081" />
+
+        <Button
+            android:id="@+id/swipe_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:onClick="go_to_swipe"
+            android:text="@string/swipe_tab" />
+
+        <Button
+            android:id="@+id/profile_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:onClick="go_to_profile"
+            android:text="@string/profile_tab" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/off_white"
-        android:padding="16dp"></ListView>
+        android:layout_below="@+id/tabs"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
+            android:text="Logout" />
+
+        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/usersListView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/logoutButton"></ListView>
+    </LinearLayout>
+
+</RelativeLayout>

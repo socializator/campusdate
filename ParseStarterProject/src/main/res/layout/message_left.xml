@@ -5,38 +5,28 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
-    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_marginRight="10dp">
 
         <TextView
             android:id="@+id/txtSender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:text=""
-            android:textSize="12sp"
-            android:singleLine="true"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="10dp"
-            android:paddingBottom="5dp"
-            android:textColor="@android:color/black" android:textStyle="bold"/>
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:id="@+id/txtDate"
-            android:layout_alignParentLeft="true"
-            android:textColor="@color/sinch_purple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="2dp"
-            android:paddingBottom="5dp"
-            android:textSize="12sp"
-            android:text=""
-            android:layout_alignBottom="@+id/txtSender"/>
+            android:layout_alignBottom="@+id/txtSender"
+            android:layout_alignParentLeft="true" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtSender"
             android:layout_alignParentLeft="true"
             android:padding="10dp"
             android:background="@color/nice_gray"
@@ -44,15 +34,11 @@
 
             <TextView
                 android:id="@+id/txtMessage"
-                android:paddingLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                android:text="Hello"
-                />
-
+                android:paddingLeft="10dp"
+                android:text="Hello" />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
