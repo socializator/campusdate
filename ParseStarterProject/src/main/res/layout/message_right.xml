@@ -5,39 +5,52 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
         android:layout_marginLeft="10dp">
-
         <TextView
             android:id="@+id/txtSender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text=""
+            android:textSize="12sp"
+            android:singleLine="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:textColor="@android:color/black" android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txtDate"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/sinch_purple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="2dp"
+            android:paddingBottom="5dp"
+            android:textSize="12sp"
+            android:text=""
             android:layout_alignBottom="@+id/txtSender"
-            android:layout_alignParentRight="true" />
+            />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/txtSender"
             android:layout_alignParentRight="true"
             android:padding="10dp"
             android:background="@color/nice_blue"
             >
-            
+
             <TextView
                 android:id="@+id/txtMessage"
+                android:paddingRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#fff"
-                android:text="Hi I love you." />
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:text="Hello, how are you?"
+                />
 
         </RelativeLayout>
     </RelativeLayout>
