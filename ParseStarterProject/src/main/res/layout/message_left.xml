@@ -39,7 +39,7 @@
             android:layout_below="@+id/txtSender"
             android:layout_alignParentLeft="true"
             android:padding="10dp"
-            android:background="@drawable/grey_bubble"
+            android:background="@color/nice_gray"
             >
 
             <TextView

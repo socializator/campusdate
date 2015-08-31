@@ -5,13 +5,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -33,6 +36,8 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        Intent intent = getIntent();
+        username = intent.getStringExtra("Email");
 
         ActionBar ar = getActionBar();
         //ar.setTitle("welcome");
@@ -40,11 +45,13 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         confirmButton.setOnClickListener(this);
         cancelButton = (Button) findViewById(R.id.button_cancel);
         cancelButton.setOnClickListener(this);
+
+        TextView txtEmail = ((TextView) findViewById(R.id.signup_email));
+        txtEmail.setText("Your Email: " + username);
     }
 
     @Override
     public void onClick(View view) {
-        username = ((EditText) findViewById(R.id.signup_username)).getText().toString().toLowerCase();
         password1 = ((EditText) findViewById(R.id.signup_password)).getText().toString();
         password2 = ((EditText) findViewById(R.id.signup_password2)).getText().toString();
         firstname = ((EditText) findViewById(R.id.signup_firstname)).getText().toString();
@@ -58,11 +65,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     }
 
     private void checkInputFields() {
-        String email_s = username.substring(username.length() - 3);
-        email_s.replaceAll("\\s+", "");
-        if (isEmpty(username)) {
-            alertMsg("Sign Up Failed", "Please Enter an Email Address");
-        } else if (isEmpty(password1) || isEmpty(password2)) {
+       if (isEmpty(password1) || isEmpty(password2)) {
             alertMsg("Sign Up Failed", "Please Enter Password");
         } else if (!password1.equals(password2)) {
             alertMsg("Sign Up Failed", "The passwords do not match");
@@ -70,8 +73,6 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
             alertMsg("Sign Up Failed", "Please Enter Firstname or Lastname");
         } else if (!(firstname.matches("[a-zA-Z]+")) || !(lastname.matches("[a-zA-Z]+"))) {
             alertMsg("Sign Up Failed", "Please only enter letters for names.");
-        } else if (!email_s.equals("edu")) {
-            alertMsg("Sign Up Failed", "Please enter a valid College Email Address.");
         } else {
             processSignup();
         }

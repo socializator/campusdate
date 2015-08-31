@@ -2,8 +2,12 @@ package com.parse.starter;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +17,8 @@ import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseUser;
+
+import java.util.Random;
 
 public class LoginActivity extends Activity {
 
@@ -64,7 +70,7 @@ public class LoginActivity extends Activity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gotoSignup();
+                emailPopup();
             }
         });
     }
@@ -96,14 +102,104 @@ public class LoginActivity extends Activity {
         startActivity(intent);
     }
 
-    private void gotoSignup() {
-        Intent intent = new Intent(this, SignUpActivity.class);
+    private void gotoSignup(String email) {
+        Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+        intent.putExtra("Email",email);
         startActivity(intent);
     }
 
     private void gotoProfile() {
         Intent intent = new Intent(this, ProfilePageActivity.class);
         startActivity(intent);
+    }
+
+    protected void emailPopup() {
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Please Enter Your College Email Address").setIcon(android.R.drawable.ic_dialog_email).setView(input).setPositiveButton("Verify", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                final String k = generateKey(5);
+                System.out.println(k);
+                if(isEmailValid(input)) {
+                    AccessCodePopup(input.getText().toString().trim().toLowerCase(),k);
+                }else{
+                    if(isEmpty(input.getText().toString())){
+                        Toast.makeText(getApplicationContext(),
+                                "Empty Input",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),
+                                input.getText().toString() + "is not valid",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    emailPopup();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
+    protected void AccessCodePopup(final String email, final String key) {
+        final EditText input = new EditText(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your Email: " + email);
+        builder.setTitle("Please Enter Your Access Code ").setIcon(android.R.drawable.ic_dialog_alert).setView(input).setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if(key.equals(input.getText().toString().trim())){
+                    gotoSignup(email);
+                }
+                else{
+                    if(isEmpty(input.getText().toString())){
+                        Toast.makeText(getApplicationContext(),
+                                "Empty Input",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),
+                                "Access Code is not valid",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    AccessCodePopup(email,key);
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
+    private boolean isEmailValid(EditText et){
+        boolean res = true;
+        String email_s = "";
+        String s = et.getText().toString();
+        if(s.length()>3) {
+            email_s = s.substring(s.length() - 3);
+            email_s.replaceAll("\\s+", "");
+        }
+        if (isEmpty(s)||s.length()<3||!email_s.equals("edu")) {
+            res = false;
+        }
+        return res;
+    }
+
+    public boolean isEmpty(String s) {
+        return s.trim().length() > 0 ? false : true;
+    }
+
+    public static String generateKey(int length){
+        String alphabet =
+                new String("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+        int n = alphabet.length();
+
+        String result = new String();
+        Random r = new Random();
+
+        for (int i=0; i<length; i++)
+            result = result + alphabet.charAt(r.nextInt(n));
+
+        return result;
     }
 }
 
