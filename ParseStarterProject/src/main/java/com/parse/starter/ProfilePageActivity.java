@@ -1,5 +1,6 @@
 package com.parse.starter;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -62,6 +63,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
      ******************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
 

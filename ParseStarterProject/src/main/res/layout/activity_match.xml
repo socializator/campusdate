@@ -10,8 +10,10 @@
 
     <LinearLayout
         android:id="@+id/tabs"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:orientation="horizontal">
 
         <Button
@@ -19,30 +21,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#fff"
+            android:background="#2196F3"
             android:onClick="go_to_matches"
             android:text="@string/matches_tab"
-            android:textColor="#FF4081" />
+            android:textColor="#fff" />
 
         <Button
             android:id="@+id/swipe_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#fff"
+            android:background="#2196F3"
             android:onClick="go_to_swipe"
-            android:text="@string/swipe_tab" />
+            android:text="@string/swipe_tab"
+            android:textColor="#BBDEFB" />
 
         <Button
             android:id="@+id/profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#fff"
+            android:background="#2196F3"
             android:onClick="go_to_profile"
-            android:text="@string/profile_tab" />
+            android:text="@string/profile_tab"
+            android:textColor="#BBDEFB" />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
