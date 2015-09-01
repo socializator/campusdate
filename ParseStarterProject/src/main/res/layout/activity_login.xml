@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Sign Up"
-            android:background="@color/gray" />
+            android:background="@color/nice_gray" />
 
     </LinearLayout>
 

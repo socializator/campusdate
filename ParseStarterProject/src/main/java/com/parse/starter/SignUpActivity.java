@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -98,12 +99,11 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
      * initialize database object for this user.
      */
     private void setupParse() {
-        ParseUser user = new ParseUser();
+        final ParseUser user = new ParseUser();
+
         user.setUsername(username);
         user.setPassword(password1);
         user.setEmail(username);
-//        user.put("firstname", firstname);
-//        user.put("lastname", lastname);
         user.put("firsttime", true);
         // Call the Parse signup method
         user.signUpInBackground(new SignUpCallback() {
@@ -115,6 +115,13 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                     else
                         alertMsg("User Sign Up Failed", e.getMessage());
                 } else {
+                    ParseObject profile = new ParseObject("Profile");
+                    profile.put("user_object_id", user.getObjectId());
+                    profile.put("first_name", firstname);
+                    profile.put("last_name", lastname);
+                    // email domain
+                    profile.saveInBackground();
+
                     clearAlltext();
                     finishTag = true;
                     alertMsg("Success!", "You have successfully signed up.");

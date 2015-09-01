@@ -31,6 +31,7 @@ public class LoginActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ParseUser.logOut();
         super.onCreate(savedInstanceState);
         ActionBar ar = getActionBar();
         ar.hide();
@@ -118,7 +119,7 @@ public class LoginActivity extends Activity {
         builder.setTitle("Please Enter Your Student Email Address").setIcon(android.R.drawable.ic_dialog_email).setView(input).setPositiveButton("Verify", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 final String k = generateKey(5);
-//                System.out.println(k);
+                //System.out.println(k);
                 if (isEmailValid(input)) {
                     //send email
                     Toast.makeText(getApplicationContext(),
