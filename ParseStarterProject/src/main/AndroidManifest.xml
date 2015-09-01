@@ -59,6 +59,10 @@
             android:name=".TinderSwipe"
             android:label="@string/title_activity_my" >
         </activity>
+        <activity
+            android:name=".ShowOthersProfile"
+            android:label="@string/title_activity_show_others_profile" >
+        </activity>
     </application>
 
 </manifest>
