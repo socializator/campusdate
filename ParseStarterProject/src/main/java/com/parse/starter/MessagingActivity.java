@@ -44,7 +44,7 @@ public class MessagingActivity extends Activity {
         ActionBar bar = getActionBar();
         bar.setIcon(android.R.color.transparent);
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#03A9F4")));
-        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Campusdate</font>"));
+        //bar.setTitle(Html.fromHtml("<font color='#ffffff'>Campusdate</font>"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.messaging);
 
@@ -190,8 +190,13 @@ public class MessagingActivity extends Activity {
                     result[1] = object.getString("last_name");
                     result[2] = object.getString("whats_up");
                     ActionBar ab = getActionBar();
-                    ab.setTitle(result[0] + " "+ result[1]);
-                    ab.setSubtitle(result[2]);
+                    //ab.setTitle(result[0] + " "+ result[1]);
+                    String s = result[0] + " "+ result[1];
+                    ab.setTitle(Html.fromHtml("<font color='#ffffff'>" + s + "</font>"));
+                    //ab.setSubtitle(result[2]);
+                    String status = result[2];
+                    ab.setSubtitle(Html.fromHtml("<font color='#ffffff'>" + status + "</font>"));
+
                 }
             }
         });
