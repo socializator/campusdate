@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,8 +66,10 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
      ******************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActionBar actionBar = getActionBar();
-        actionBar.hide();
+        ActionBar bar = getActionBar();
+        bar.setIcon(android.R.color.transparent);
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#03A9F4")));
+        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Campusdate</font>"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
 
@@ -307,7 +312,10 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
+            ParseUser.logOut();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
             return true;
         }
 
