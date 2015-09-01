@@ -287,12 +287,35 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
         profile.saveInBackground();
 
+        saveGenderInterestToUserTable();
+
         // Show a simple toast message
         Toast.makeText(ProfilePageActivity.this, "Profile Saved",
                 Toast.LENGTH_SHORT).show();
 
     }
 
+    protected void saveGenderInterestToUserTable(){
+        final ParseUser currentUser = ParseUser.getCurrentUser();
+        final String currentUserObjectIdID = currentUser.getObjectId();
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
+        // Retrieve the object by id
+        //query.whereEqualTo("objectId", currentUserObjectIdID);
+        query.getInBackground(currentUserObjectIdID, new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if(e == null){
+                    object.put("interested_in_females",interestedInFemale);
+                    object.put("interested_in_males", interestedInMale);
+
+                    object.saveInBackground();
+                }else{
+
+                }
+            }
+        });
+    }
     protected void alertMsg(String title, String msg) {
         //build dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -301,11 +324,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         builder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //clear msg
-                        //clearAlltext();
-                        /*if (finishTag) {
-                            finish();
-                        }*/
+
                     }
                 });
         //create alert dialog
