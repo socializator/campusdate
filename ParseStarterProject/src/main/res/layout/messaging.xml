@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff">
 
     <ListView
         android:id="@+id/listMessages"
@@ -13,21 +14,22 @@
         android:padding="0dip"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
-        tools:listitem="@layout/message_left" />
+        tools:listitem="@layout/message_left"
+        android:background="#fff" />
 
     <RelativeLayout
         android:id="@+id/divider"
         android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:layout_above="@+id/relSendMessage"
-        android:background="@color/off_white" />
+        android:background="#B6B6B6" />
 
     <RelativeLayout
         android:id="@+id/relSendMessage"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
+        android:background="#fff"
         android:paddingLeft="10dp">
 
 
@@ -41,7 +43,7 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/sendButton"
             android:background="@android:color/white"
-            android:hint="Message..."
+            android:hint="Send message..."
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
