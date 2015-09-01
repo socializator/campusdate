@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
                             }
                         } else {
                             Toast.makeText(getApplicationContext(),
-                                    "Wrong username/password combo",
+                                    "Email & password do not match. Try again.",
                                     Toast.LENGTH_LONG).show();
                         }
                     }
@@ -117,7 +117,7 @@ public class LoginActivity extends Activity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Please Enter Your College Email Address").setIcon(android.R.drawable.ic_dialog_email).setView(input).setPositiveButton("Verify", new DialogInterface.OnClickListener() {
+        builder.setTitle("Enter your student email.").setIcon(android.R.drawable.ic_dialog_email).setView(input).setPositiveButton("Verify", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 final String k = generateKey(5);
                 System.out.println(k);
