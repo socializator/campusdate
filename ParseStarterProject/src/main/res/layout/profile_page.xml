@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
 
         <Button
             android:id="@+id/matches_button"
@@ -23,7 +26,7 @@
             android:background="@color/primary"
             android:onClick="go_to_matches"
             android:text="@string/matches_tab"
-            android:textColor="#C5CAE9" />
+            android:textColor="@color/primary_light" />
 
         <Button
             android:id="@+id/swipe_button"
@@ -33,7 +36,7 @@
             android:background="@color/primary"
             android:onClick="go_to_swipe"
             android:text="@string/swipe_tab"
-            android:textColor="#C5CAE9" />
+            android:textColor="@color/primary_light" />
 
         <Button
             android:id="@+id/profile_button"
@@ -48,237 +51,264 @@
     </LinearLayout>
 
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabs"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
 
-            android:layout_centerVertical="true"
-            android:padding="15dp"
-            android:text="Profile Photo" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
 
-
-        <com.parse.ParseImageView
-            android:id="@+id/profile_photo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
-
-    </RelativeLayout>
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:text="Profile Picture:" />
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray">
+            <com.parse.ParseImageView
+                android:id="@+id/profile_photo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
 
-            android:layout_centerVertical="true"
-            android:padding="15dp"
-            android:text="First Name" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
 
-        <EditText
-            android:id="@+id/firstNameProfile"
-            android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:text="First Name:" />
+
+            <EditText
+                android:id="@+id/firstNameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+
+
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-
-
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="#fff"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
 
-            android:layout_centerVertical="true"
-            android:padding="15dp"
-            android:text="Last Name" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
 
-        <EditText
-            android:id="@+id/lastNameProfile"
-            android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:text="Last Name:" />
+
+            <EditText
+                android:id="@+id/lastNameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray">
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="#fff"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
 
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:padding="15dp"
-            android:text="Gender" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
 
-        <Spinner
-            android:id="@+id/genderSpinnerProfile"
-            android:layout_width="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:text="Gender:" />
+
+            <Spinner
+                android:id="@+id/genderSpinnerProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignBottom="@+id/textView8"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/textView8"
+
+                android:layout_marginLeft="61dp"
+                android:layout_marginStart="61dp"
+                android:layout_toEndOf="@+id/textView8"
+                android:layout_toRightOf="@+id/textView8"
+                android:entries="@array/gender_items" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
 
-            android:layout_alignBottom="@+id/textView8"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/textView8"
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="Interested In:" />
 
-            android:layout_marginLeft="61dp"
-            android:layout_marginStart="61dp"
-            android:layout_toEndOf="@+id/textView8"
-            android:layout_toRightOf="@+id/textView8"
-            android:entries="@array/gender_items" />
+            <CheckBox
+                android:id="@+id/maleCheckBoxProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_column="1"
 
-    </RelativeLayout>
+                android:layout_marginLeft="15dp"
+                android:layout_toEndOf="@+id/textView9"
+                android:layout_toRightOf="@+id/textView9"
+                android:text="Males" />
 
+            <CheckBox
+                android:id="@+id/femaleCheckBoxProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+                android:layout_centerVertical="true"
+                android:layout_column="1"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Females" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="Gender Interested In" />
+            android:background="#fff"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
 
-        <CheckBox
-            android:id="@+id/maleCheckBoxProfile"
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dip"
+                android:text="Age:" />
+
+            <EditText
+                android:id="@+id/ageProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:ems="10" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_column="1"
+            android:background="#fff"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
 
-            android:layout_marginLeft="15dp"
-            android:layout_toEndOf="@+id/textView9"
-            android:layout_toRightOf="@+id/textView9"
-            android:text="Male" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dip"
+                android:text="Major:" />
 
-        <CheckBox
-            android:id="@+id/femaleCheckBoxProfile"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/majorProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:ems="10" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:background="#fff"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
 
-            android:layout_centerVertical="true"
-            android:layout_column="1"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
-            android:text="Female" />
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="Status:" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray">
+            <EditText
+                android:id="@+id/whatsupProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:ems="10" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/saveButtonProfile"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:padding="15dip"
-            android:text="Age" />
-
-        <EditText
-            android:id="@+id/ageProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:ems="10" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dip"
-            android:text="Major" />
-
-        <EditText
-            android:id="@+id/majorProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:ems="10" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="What's Up" />
-
-        <EditText
-            android:id="@+id/whatsupProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:ems="10" />
-
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/saveButtonProfile"
-        android:layout_width="123dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginLeft="39dp"
-        android:layout_marginStart="39dp"
-        android:text="Save" />
+            android:layout_gravity="right"
+            android:text="Save"
+            android:textColor="#fff"
+            android:background="@color/primary"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" />
+    </LinearLayout>
 
 
     <!--TableRow>
@@ -294,4 +324,4 @@
     </TableRow-->
 
 
-</LinearLayout>
+</RelativeLayout>
