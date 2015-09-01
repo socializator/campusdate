@@ -41,7 +41,7 @@
             android:label="@string/title_activity_profile_page" />
         <activity
             android:name=".Swipe"
-            android:label="@string/title_activity_swipe" />
+            android:label="Campusdate" />
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" />

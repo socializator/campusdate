@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#2196F3"
+            android:background="@color/primary"
             android:onClick="go_to_matches"
             android:text="@string/matches_tab"
             android:textColor="#fff" />
@@ -31,20 +31,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#2196F3"
+            android:background="@color/primary"
             android:onClick="go_to_swipe"
             android:text="@string/swipe_tab"
-            android:textColor="#BBDEFB" />
+            android:textColor="@color/primary_light" />
 
         <Button
             android:id="@+id/profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#2196F3"
+            android:background="@color/primary"
             android:onClick="go_to_profile"
             android:text="@string/profile_tab"
-            android:textColor="#BBDEFB" />
+            android:textColor="@color/primary_light" />
 
     </LinearLayout>
 
@@ -62,7 +62,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="center_horizontal"
-            android:text="Logout" />
+            android:text="Logout"
+            android:background="@color/gray" />
 
         <ListView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/usersListView"

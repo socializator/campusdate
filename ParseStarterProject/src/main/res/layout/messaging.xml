@@ -51,7 +51,9 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_margin="4dp"
-            android:background="@drawable/button_send" />
+            android:background="@color/primary"
+            android:text="Send"
+            android:textColor="#fff" />
     </RelativeLayout>
 
 

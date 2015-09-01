@@ -8,4 +8,17 @@
     <color name="nice_gray">#e5e4e2</color>
     <color name="nice_blue">#2196f3</color>
 
+
+    <color name="primary">#03A9F4</color>
+    <color name="primary_dark">#0288D1</color>
+    <color name="primary_light">#B3E5FC</color>
+    <color name="accent">#FF4081</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
+    <color name="gray">#D6D7D7</color>
+
+
 </resources>

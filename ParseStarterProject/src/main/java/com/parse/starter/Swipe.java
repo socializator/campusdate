@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,11 +30,27 @@ public class Swipe extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         ActionBar actionBar = getActionBar();
-        actionBar.hide();
+        //actionBar.hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe3);
         get_data();
+
+        final Button dislike_button = (Button) findViewById(R.id.dislike_button);
+        dislike_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                dislike_user();
+            }
+        });
+        final Button like_button = (Button) findViewById(R.id.like_button);
+        like_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                like_user();
+            }
+        });
+
 
         LinearLayout image_layout = (LinearLayout) findViewById(R.id.image_layout);
         image_layout.setOnTouchListener(new OnSwipeTouchListener(this) {
@@ -84,7 +101,7 @@ public class Swipe extends Activity {
 
 
     public void go_to_swipe(View view) {
-       //nothing
+        //nothing
     }
 
 
