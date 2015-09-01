@@ -47,7 +47,7 @@
             android:label="@string/title_activity_sign_up" />
         <activity
             android:name=".MatchActivity"
-            android:label="@string/title_activity_match" />
+            android:label="Campusdate" />
         <activity
             android:name=".MessagingActivity"
             android:label="Hey Chat~" />

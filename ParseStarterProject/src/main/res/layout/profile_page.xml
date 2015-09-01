@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#3F51B5"
+            android:background="@color/primary"
             android:onClick="go_to_matches"
             android:text="@string/matches_tab"
             android:textColor="#C5CAE9" />
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#3F51B5"
+            android:background="@color/primary"
             android:onClick="go_to_swipe"
             android:text="@string/swipe_tab"
             android:textColor="#C5CAE9" />
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#3F51B5"
+            android:background="@color/primary"
             android:onClick="go_to_profile"
             android:text="@string/profile_tab"
             android:textColor="#fff" />

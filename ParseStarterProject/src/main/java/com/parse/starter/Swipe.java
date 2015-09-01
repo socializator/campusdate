@@ -3,7 +3,10 @@ package com.parse.starter;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +33,10 @@ public class Swipe extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-        ActionBar actionBar = getActionBar();
+        ActionBar bar = getActionBar();
+        bar.setIcon(android.R.color.transparent);
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#03A9F4")));
+        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Campusdate</font>"));
         //actionBar.hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe3);
@@ -81,7 +85,10 @@ public class Swipe extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
+            ParseUser.logOut();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

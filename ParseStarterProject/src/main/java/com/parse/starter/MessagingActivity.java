@@ -3,7 +3,10 @@ package com.parse.starter;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +41,10 @@ public class MessagingActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar bar = getActionBar();
+        bar.setIcon(android.R.color.transparent);
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#03A9F4")));
+        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Campusdate</font>"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.messaging);
 
