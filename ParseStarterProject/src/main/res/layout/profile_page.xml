@@ -320,19 +320,5 @@
             android:layout_alignParentTop="true" />
     </LinearLayout>
 
-
-    <!--TableRow>
-        <TextView
-            android:text=".edu Email"
-            android:padding="15dip" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/eduEmail"
-            android:layout_column="1" />
-    </TableRow-->
-
-
 </RelativeLayout>
 </ScrollView>
