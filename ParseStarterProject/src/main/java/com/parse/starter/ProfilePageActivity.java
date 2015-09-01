@@ -2,6 +2,8 @@ package com.parse.starter;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -12,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,7 +41,7 @@ import java.io.FileNotFoundException;
 public class ProfilePageActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
     /******************************
-     * XML Objects Declairation
+     * Variable Declairation
      ******************************/
     protected ParseImageView parseImageView;
     protected String photoPath;
@@ -57,6 +60,17 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
     protected Button saveButton;
 
     private static int RESULT_LOAD_IMG = 1;
+
+    boolean finishTag = false;
+
+    protected String firstName;
+    protected String lastName;
+    protected String age;
+    protected String major;
+    protected String whatsUp;
+    protected String gender;
+    protected Boolean interestedInMale;
+    protected Boolean interestedInFemale;
 
     /******************************
      * onCreate
@@ -152,8 +166,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
             }
         });
 
-        /********** Upload an image to Parse Database **********/
-
+        /********** Access Image Gallery **********/
 
         parseImageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -176,47 +189,29 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                 final String currentUserObjectIdID = currentUser.getObjectId();
                 //String currentUserObjectIdID = "r22mHwUeTu";
 
-                //ParseObject obj = ParseObject.createWithoutData("_User", currentUserObjectIdID);
-
                 //update an object
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
                 // Retrieve the object by id
-
                 query.whereEqualTo("user_object_id", currentUserObjectIdID);
-
                 query.getFirstInBackground(new GetCallback<ParseObject>() {
                     public void done(ParseObject profile, ParseException e) {
                         if (e == null) {
                             // Now let's update it with some new data. In this case, only cheatMode and score
                             // will get sent to the Parse Cloud. playerName hasn't changed
+                            firstName = firstNameEditText.getText().toString();
+                            lastName = lastNameEditText.getText().toString();
 
-                            if(bitmap != null){
-                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
-                                byte[] image = stream.toByteArray();
+                            gender = genderSpinner.getSelectedItem().toString();
+                            interestedInMale = maleInterestCheckBox.isChecked();
+                            interestedInFemale = femaleInterestCheckBox.isChecked();
 
-                                ParseFile file = new ParseFile("prof_pic.jpg",image);
+                            age = ageEditText.getText().toString();
+                            major = majorEditText.getText().toString();
+                            whatsUp = whatsupEditText.getText().toString();
 
-                                file.saveInBackground();
+                            checkInputFields(profile);
 
-                                profile.put("profile_picture", file);
-                            }
-
-                            profile.put("first_name", firstNameEditText.getText().toString());
-                            profile.put("last_name", lastNameEditText.getText().toString());
-                            profile.put("age", ageEditText.getText().toString());
-                            profile.put("major", majorEditText.getText().toString());
-                            profile.put("whats_up", whatsupEditText.getText().toString());
-                            profile.put("gender", genderSpinner.getSelectedItem().toString());
-                            profile.put("interested_in_males", maleInterestCheckBox.isChecked());
-                            profile.put("interested_in_females", femaleInterestCheckBox.isChecked());
-
-                            profile.saveInBackground();
-
-                            // Show a simple toast message
-                            Toast.makeText(ProfilePageActivity.this, "Profile Saved",
-                                    Toast.LENGTH_SHORT).show();
 
                         } else {
                             System.out.println("Fail");
@@ -227,6 +222,106 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
             }
         });
     }
+
+    /**********************functions for checking input***********************/
+    public boolean isEmpty(String s) {
+        return s.trim().length() > 0 ? false : true;
+    }
+
+
+    private void checkInputFields(ParseObject profile) {
+
+        if(isEmpty(firstName)){
+            alertMsg("Saving Profile Failed", "Please enter your First Name");
+        }else if(!(firstName.matches("[a-zA-Z]+"))){
+            alertMsg("Saving Profile Failed", "Please " +
+                    "only enter letters for First Name.");
+        }else if(isEmpty(lastName)){
+            alertMsg("Saving Profile Failed", "Please enter your Last Name");
+        }else if(!(lastName.matches("[a-zA-Z]+"))){
+            alertMsg("Saving Profile Failed", "Please " +
+                    "only enter letters for Last Name.");
+        }else if(gender.equals("Not Selected")){
+            alertMsg("Saving Profile Failed", "You must enter your gender");
+        }else if(interestedInFemale == false && interestedInMale == false){
+            alertMsg("Saving Profile Failed", "You must check at least one " +
+                    "gender you are interested in");
+        }else if(!(age.matches("[0-9]+" )) && !(age.equals(""))) {
+            alertMsg("Saving Profile Failed", "Please " +
+                    "enter a number for age or leave it blank");
+        }else {
+            updateProfile(profile);
+        }
+    }
+    /*
+     * updateProfile
+     */
+    //This function update user profile after all user inputs are verified
+    protected void updateProfile (ParseObject profile){
+        if(bitmap != null){
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+            byte[] image = stream.toByteArray();
+
+            ParseFile file = new ParseFile("prof_pic.jpg",image);
+
+            file.saveInBackground();
+
+            profile.put("profile_picture", file);
+        }
+
+        profile.put("first_name", firstName);
+        profile.put("last_name", lastName);
+        profile.put("age", age);
+        profile.put("major", major);
+        profile.put("whats_up", whatsUp);
+        profile.put("gender", gender);
+        profile.put("interested_in_males", interestedInMale);
+        profile.put("interested_in_females", interestedInFemale);
+
+        profile.saveInBackground();
+
+        // Show a simple toast message
+        Toast.makeText(ProfilePageActivity.this, "Profile Saved",
+                Toast.LENGTH_SHORT).show();
+
+    }
+
+    protected void alertMsg(String title, String msg) {
+        //build dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //clear msg
+                        //clearAlltext();
+                        /*if (finishTag) {
+                            finish();
+                        }*/
+                    }
+                });
+        //create alert dialog
+        AlertDialog alert = builder.create();
+        //show dialog on screen
+        alert.show();
+    }
+
+    /**
+     * Helper function to clear all text fields in current activity
+     */
+    //this function will be using when need to clear the text user entered in the textfields
+    /*protected void clearAlltext() {
+        ViewGroup textFields = (ViewGroup) findViewById(R.id.signup_textFields);
+        for (int i = 0, count = textFields.getChildCount(); i < count; ++i) {
+            View view = textFields.getChildAt(i);
+            if (view instanceof EditText) {
+                ((EditText) view).setText("");
+            }
+        }
+    }*/
 
     /******************************
      * onActivityResult
@@ -285,6 +380,9 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         }
         return result;
     }
+
+
+
 
     /******************************
      * onCreateOptionsMenu
