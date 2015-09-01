@@ -84,6 +84,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         bar.setIcon(android.R.color.transparent);
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#03A9F4")));
         bar.setTitle(Html.fromHtml("<font color='#ffffff'>Campusdate</font>"));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
 
@@ -126,7 +127,10 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    //if object == null
+                    //add profile object Id to User Table
+                    currentUser.put("profile_object_id",object.getObjectId());
+                    currentUser.put("firsttime",false);
+                    currentUser.saveInBackground();
 
                     //get profile picture
                     ParseFile image = object.getParseFile("profile_picture");
@@ -305,8 +309,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         query.getInBackground(currentUserObjectIdID, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
-                if(e == null){
-                    object.put("interested_in_females",interestedInFemale);
+                if (e == null) {
+                    object.put("interested_in_females", interestedInFemale);
                     object.put("interested_in_males", interestedInMale);
 
                     object.saveInBackground();
