@@ -42,15 +42,7 @@ public class MatchActivity extends Activity {
         setContentView(R.layout.activity_match);
 
 
-        logoutButton = (Button) findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ParseUser.logOut();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     //display clickable a list of all users
