@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Pair;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,9 +52,7 @@ public class LoginActivity extends Activity {
                         if (user != null) {
                             if (user.getBoolean("firsttime")) {
                                 gotoProfile();
-
-                            }
-                            else {
+                            } else {
                                 gotoMatch();
                             }
                         } else {
@@ -104,7 +102,7 @@ public class LoginActivity extends Activity {
 
     private void gotoSignup(String email) {
         Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-        intent.putExtra("Email",email);
+        intent.putExtra("Email", email);
         startActivity(intent);
     }
 
@@ -120,16 +118,18 @@ public class LoginActivity extends Activity {
         builder.setTitle("Enter your student email.").setIcon(android.R.drawable.ic_dialog_email).setView(input).setPositiveButton("Verify", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 final String k = generateKey(5);
-                System.out.println(k);
-                if(isEmailValid(input)) {
-                    AccessCodePopup(input.getText().toString().trim().toLowerCase(),k);
-                }else{
-                    if(isEmpty(input.getText().toString())){
+//                System.out.println(k);
+                if (isEmailValid(input)) {
+                    //send email
+                    sendEmail(input.getText().toString().trim().toLowerCase(),k);
+                    //PopUp
+                    AccessCodePopup(input.getText().toString().trim().toLowerCase(), k);
+                } else {
+                    if (isEmpty(input.getText().toString())) {
                         Toast.makeText(getApplicationContext(),
                                 "Empty Input",
                                 Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getApplicationContext(),
                                 input.getText().toString() + "is not valid",
                                 Toast.LENGTH_SHORT).show();
@@ -148,21 +148,19 @@ public class LoginActivity extends Activity {
         builder.setMessage("Your Email: " + email);
         builder.setTitle("Please Enter Your Access Code ").setIcon(android.R.drawable.ic_dialog_alert).setView(input).setPositiveButton("Okay", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                if(key.equals(input.getText().toString().trim())){
+                if (key.equals(input.getText().toString().trim())) {
                     gotoSignup(email);
-                }
-                else{
-                    if(isEmpty(input.getText().toString())){
+                } else {
+                    if (isEmpty(input.getText().toString())) {
                         Toast.makeText(getApplicationContext(),
                                 "Empty Input",
                                 Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getApplicationContext(),
                                 "Access Code is not valid",
                                 Toast.LENGTH_SHORT).show();
                     }
-                    AccessCodePopup(email,key);
+                    AccessCodePopup(email, key);
                 }
             }
         });
@@ -170,15 +168,15 @@ public class LoginActivity extends Activity {
         builder.show();
     }
 
-    private boolean isEmailValid(EditText et){
+    private boolean isEmailValid(EditText et) {
         boolean res = true;
         String email_s = "";
         String s = et.getText().toString();
-        if(s.length()>3) {
+        if (s.length() > 3) {
             email_s = s.substring(s.length() - 3);
             email_s.replaceAll("\\s+", "");
         }
-        if (isEmpty(s)||s.length()<3||!email_s.equals("edu")) {
+        if (isEmpty(s) || s.length() < 3 || !email_s.equals("edu")) {
             res = false;
         }
         return res;
@@ -188,7 +186,7 @@ public class LoginActivity extends Activity {
         return s.trim().length() > 0 ? false : true;
     }
 
-    public static String generateKey(int length){
+    public static String generateKey(int length) {
         String alphabet =
                 new String("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
         int n = alphabet.length();
@@ -196,11 +194,42 @@ public class LoginActivity extends Activity {
         String result = new String();
         Random r = new Random();
 
-        for (int i=0; i<length; i++)
+        for (int i = 0; i < length; i++)
             result = result + alphabet.charAt(r.nextInt(n));
 
         return result;
     }
+
+    public static void sendEmail(final String email, final String code) {
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    Mail m = new Mail("campusdateapp@gmail.com", "campusdateapp123");
+
+                    String[] toArr = {email};
+                    m.setTo(toArr);
+                    m.setFrom("campusdateapp@gmail.com");
+                    m.setSubject("CampusDate Access Code");
+                    m.setBody("Dear New CampusDate User:" + "\n" + email + "\n" +
+                            "Here is Your Access Code:" + "\n" + code + "\n" +
+                                    "Enjoy & Welcome!" + "\n"
+                            + "CampusDate Team"
+                    );
+
+                    try {
+                        m.send();
+                    } catch(Exception e) {
+                        Log.e("MailApp", "Could not send email", e);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
 }
+
 
 
