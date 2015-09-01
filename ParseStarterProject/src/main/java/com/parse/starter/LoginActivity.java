@@ -115,12 +115,16 @@ public class LoginActivity extends Activity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter your student email.").setIcon(android.R.drawable.ic_dialog_email).setView(input).setPositiveButton("Verify", new DialogInterface.OnClickListener() {
+        builder.setTitle("Please Enter Your Student Email Address").setIcon(android.R.drawable.ic_dialog_email).setView(input).setPositiveButton("Verify", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 final String k = generateKey(5);
 //                System.out.println(k);
                 if (isEmailValid(input)) {
                     //send email
+                    Toast.makeText(getApplicationContext(),
+                            "Access Code Sent",
+                            Toast.LENGTH_LONG).show();
+
                     sendEmail(input.getText().toString().trim().toLowerCase(),k);
                     //PopUp
                     AccessCodePopup(input.getText().toString().trim().toLowerCase(), k);
@@ -131,7 +135,7 @@ public class LoginActivity extends Activity {
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                input.getText().toString() + "is not valid",
+                                "Not A Valid College Email Address",
                                 Toast.LENGTH_SHORT).show();
                     }
                     emailPopup();
@@ -157,7 +161,7 @@ public class LoginActivity extends Activity {
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                "Access Code is not valid",
+                                "Access Code Is Not Valid",
                                 Toast.LENGTH_SHORT).show();
                     }
                     AccessCodePopup(email, key);
@@ -220,7 +224,7 @@ public class LoginActivity extends Activity {
                     try {
                         m.send();
                     } catch(Exception e) {
-                        Log.e("MailApp", "Could not send email", e);
+                        Log.e("Error", "Could not send email", e);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

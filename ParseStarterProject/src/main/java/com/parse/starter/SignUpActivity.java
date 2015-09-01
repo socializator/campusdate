@@ -71,14 +71,16 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     }
 
     private void checkInputFields() {
-       if (isEmpty(password1) || isEmpty(password2)) {
+        if (isEmpty(firstname)) {
+            alertMsg("Sign Up Failed", "Please Enter Your Firstname");
+        } else if (isEmpty(lastname)) {
+            alertMsg("Sign Up Failed", "Please Enter Your Lastname");
+        } else if (!(firstname.matches("[a-zA-Z]+")) || !(lastname.matches("[a-zA-Z]+"))) {
+            alertMsg("Sign Up Failed", "Please Only Enter Letters For Names");
+        } else if (isEmpty(password1) || isEmpty(password2)) {
             alertMsg("Sign Up Failed", "Please Enter Password");
         } else if (!password1.equals(password2)) {
-            alertMsg("Sign Up Failed", "The passwords do not match");
-        } else if (isEmpty(firstname) || isEmpty(lastname)) {
-            alertMsg("Sign Up Failed", "Please Enter Firstname or Lastname");
-        } else if (!(firstname.matches("[a-zA-Z]+")) || !(lastname.matches("[a-zA-Z]+"))) {
-            alertMsg("Sign Up Failed", "Please only enter letters for names.");
+            alertMsg("Sign Up Failed", "Passwords Do Not Match");
         } else {
             processSignup();
         }
