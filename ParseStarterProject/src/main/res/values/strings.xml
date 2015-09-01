@@ -38,6 +38,7 @@
     <string name="campusdate">Campusdate</string>
     <string name="title_activity_verify_email">VerifyEmailActivity</string>
     <string name="title_activity_my">MyActivity</string>
+    <string name="title_activity_show_others_profile">ShowOthersProfile</string>
 
 
 </resources>
