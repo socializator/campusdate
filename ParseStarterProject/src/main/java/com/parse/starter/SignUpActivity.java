@@ -102,8 +102,8 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         user.setUsername(username);
         user.setPassword(password1);
         user.setEmail(username);
-        user.put("firstname", firstname);
-        user.put("lastname", lastname);
+//        user.put("firstname", firstname);
+//        user.put("lastname", lastname);
         user.put("firsttime", true);
         // Call the Parse signup method
         user.signUpInBackground(new SignUpCallback() {
