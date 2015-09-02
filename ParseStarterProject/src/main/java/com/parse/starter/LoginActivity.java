@@ -217,7 +217,7 @@ public class LoginActivity extends Activity {
                     m.setFrom("campusdateapp@gmail.com");
                     m.setSubject("Campusdate Access Code");
                     m.setBody("Use the following access code to validate your Campusdate account." + "\n" +
-                            "Access code:"  + code
+                            "Access code: "  + code
                     );
 
                     try {

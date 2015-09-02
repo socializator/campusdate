@@ -106,6 +106,8 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         user.setEmail(username);
         user.put("firsttime", true);
         user.put("email_domain","ucsd");
+        user.put("first_name",firstname);
+        user.put("last_name",lastname);
         // Call the Parse signup method
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {

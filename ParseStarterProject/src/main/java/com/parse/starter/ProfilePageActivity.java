@@ -317,7 +317,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                 if (e == null) {
                     object.put("interested_in_females", interestedInFemale);
                     object.put("interested_in_males", interestedInMale);
-
+                    object.put("first_name", firstName);
+                    object.put("last_name", lastName);
                     object.saveInBackground();
                 }else{
 
