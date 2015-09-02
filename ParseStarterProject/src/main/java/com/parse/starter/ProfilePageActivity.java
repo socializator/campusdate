@@ -382,7 +382,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
                 // Set the Image in ImageView after decoding the String
                 bitmap = BitmapFactory.decodeFile(photoPath);
-                bitmap = getRoundedCornerBitmap(bitmap, 53);
+                //bitmap = getRoundedCornerBitmap(bitmap, 53);
                 parseImageView.setImageBitmap(bitmap);
 
             } else {
@@ -482,7 +482,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         startActivity(intent);
     }
 
-    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+    /*public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
                 .getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
@@ -502,5 +502,5 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
         return output;
-    }
+    }*/
 }
