@@ -122,8 +122,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
         /************* Retrieve Data From Parse Database *************/
         final ParseUser currentUser = ParseUser.getCurrentUser();
-        //final String currentUserObjectIdID = currentUser.getObjectId();
-        String currentUserObjectIdID = "test";
+        final String currentUserObjectIdID = currentUser.getObjectId();
+        //String currentUserObjectIdID = "test";
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
         query.whereEqualTo("user_object_id", currentUserObjectIdID);
@@ -198,8 +198,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
                 //get Current user's objectId
                 final ParseUser currentUser = ParseUser.getCurrentUser();
-                //final String currentUserObjectIdID = currentUser.getObjectId();
-                String currentUserObjectIdID = "test";
+                final String currentUserObjectIdID = currentUser.getObjectId();
+                //String currentUserObjectIdID = "test";
 
                 //update an object
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
