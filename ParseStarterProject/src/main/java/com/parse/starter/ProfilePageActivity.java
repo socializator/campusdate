@@ -122,8 +122,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
         /************* Retrieve Data From Parse Database *************/
         final ParseUser currentUser = ParseUser.getCurrentUser();
-        final String currentUserObjectIdID = currentUser.getObjectId();
-
+        //final String currentUserObjectIdID = currentUser.getObjectId();
+        String currentUserObjectIdID = "test";
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
         query.whereEqualTo("user_object_id", currentUserObjectIdID);
@@ -198,8 +198,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
                 //get Current user's objectId
                 final ParseUser currentUser = ParseUser.getCurrentUser();
-                final String currentUserObjectIdID = currentUser.getObjectId();
-                //String currentUserObjectIdID = "r22mHwUeTu";
+                //final String currentUserObjectIdID = currentUser.getObjectId();
+                String currentUserObjectIdID = "test";
 
                 //update an object
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
@@ -243,7 +243,10 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
     private void checkInputFields(ParseObject profile) {
 
-        if(isEmpty(firstName)){
+        if(profile.get("profile_picture") == null && bitmap == null){
+            alertMsg("Saving Profile Failed", "Please upload a profile photo");
+        }
+        else if(isEmpty(firstName)){
             alertMsg("Saving Profile Failed", "Please enter your First Name");
         }else if(!(firstName.matches("[a-zA-Z]+"))){
             alertMsg("Saving Profile Failed", "Please " +
