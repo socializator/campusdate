@@ -52,7 +52,7 @@ public class LoginActivity extends Activity {
                     public void done(ParseUser user, com.parse.ParseException e) {
                         if (user != null) {
                             if (user.getBoolean("firsttime")) {
-                                gotoProfile();
+                                alertMsg("Attention!", "Hey Dear New User" + "\n"+ "You Need to Setting Up Your Profile");
                             } else {
                                 gotoMatch();
                             }
@@ -193,7 +193,7 @@ public class LoginActivity extends Activity {
 
     public static String generateKey(int length) {
         String alphabet =
-                new String("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+                new String("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         int n = alphabet.length();
 
         String result = new String();
@@ -233,6 +233,23 @@ public class LoginActivity extends Activity {
             }
         });
         thread.start();
+    }
+
+    protected void alertMsg(String title, String msg) {
+        //build dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        gotoProfile();
+                    }
+                });
+        //create alert dialog
+        AlertDialog alert = builder.create();
+        //show dialog on screen
+        alert.show();
     }
 }
 

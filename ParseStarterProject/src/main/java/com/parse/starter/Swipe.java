@@ -116,15 +116,15 @@ public class Swipe extends Activity {
 
                     //show only females
                     if (interested_in_females && !interested_in_males) {
-                        users_list_query.whereEqualTo("gender", "female");
+                        users_list_query.whereEqualTo("gender", "Female");
                     }
                     //show only males
                     else if (!interested_in_females && interested_in_males) {
-                        users_list_query.whereEqualTo("gender", "male");
+                        users_list_query.whereEqualTo("gender", "Male");
                     }
 
                     users_list_query.whereNotContainedIn("objectId", seen_list);
-                    users_list_query.whereNotEqualTo("objectId", ParseUser.getCurrentUser().getObjectId());
+                    users_list_query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
 
 
                     users_list_query.findInBackground(new FindCallback<ParseObject>() {

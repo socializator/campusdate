@@ -105,6 +105,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         user.setPassword(password1);
         user.setEmail(username);
         user.put("firsttime", true);
+        user.put("email_domain","ucsd");
         // Call the Parse signup method
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
@@ -119,6 +120,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                     profile.put("user_object_id", user.getObjectId());
                     profile.put("first_name", firstname);
                     profile.put("last_name", lastname);
+                    profile.put("email_domain","ucsd");
                     // email domain
                     profile.saveInBackground();
 
