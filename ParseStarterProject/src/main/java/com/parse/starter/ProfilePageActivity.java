@@ -213,7 +213,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                             firstName = firstNameEditText.getText().toString();
                             lastName = lastNameEditText.getText().toString();
 
-                            gender = genderSpinner.getSelectedItem().toString();
+                            gender = genderSpinner.getSelectedItem().toString().toLowerCase();
                             interestedInMale = maleInterestCheckBox.isChecked();
                             interestedInFemale = femaleInterestCheckBox.isChecked();
 

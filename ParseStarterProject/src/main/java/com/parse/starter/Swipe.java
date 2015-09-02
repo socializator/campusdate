@@ -124,7 +124,7 @@ public class Swipe extends Activity {
                     }
 
                     users_list_query.whereNotContainedIn("objectId", seen_list);
-                    users_list_query.whereNotEqualTo("objectId", ParseUser.getCurrentUser().getObjectId());
+                    users_list_query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
 
 
                     users_list_query.findInBackground(new FindCallback<ParseObject>() {
