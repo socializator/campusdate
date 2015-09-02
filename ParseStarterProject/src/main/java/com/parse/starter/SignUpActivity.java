@@ -54,7 +54,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         cancelButton.setOnClickListener(this);
 
         TextView txtEmail = ((TextView) findViewById(R.id.signup_email));
-        txtEmail.setText("Your Email: " + username);
+        txtEmail.setText("Email: " + username);
     }
 
     @Override
@@ -73,15 +73,15 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
 
     private void checkInputFields() {
         if (isEmpty(firstname)) {
-            alertMsg("Sign Up Failed", "Please Enter Your Firstname");
+            alertMsg("Sign up failed.", "Enter your first name.");
         } else if (isEmpty(lastname)) {
-            alertMsg("Sign Up Failed", "Please Enter Your Lastname");
+            alertMsg("Sign up failed.", "Enter your last name");
         } else if (!(firstname.matches("[a-zA-Z]+")) || !(lastname.matches("[a-zA-Z]+"))) {
-            alertMsg("Sign Up Failed", "Please Only Enter Letters For Names");
+            alertMsg("Sign up failed.", "Only use letters in your name.");
         } else if (isEmpty(password1) || isEmpty(password2)) {
-            alertMsg("Sign Up Failed", "Please Enter Password");
+            alertMsg("Sign up failed.", "Enter a password.");
         } else if (!password1.equals(password2)) {
-            alertMsg("Sign Up Failed", "Passwords Do Not Match");
+            alertMsg("Sign up failed.", "Passwords do not match.");
         } else {
             processSignup();
         }
@@ -112,9 +112,9 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                 stopLoading();
                 if (e != null) {
                     if (e.getCode() == 100)
-                        alertMsg("Connection Failed", "Please check your Internet connection");
+                        alertMsg("Connection failed.", "Check your internet connection.");
                     else
-                        alertMsg("User Sign Up Failed", e.getMessage());
+                        alertMsg("Sign up failed.", e.getMessage());
                 } else {
                     ParseObject profile = new ParseObject("Profile");
                     profile.put("user_object_id", user.getObjectId());
@@ -126,7 +126,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
 
                     clearAlltext();
                     finishTag = true;
-                    alertMsg("Success!", "You have successfully signed up.");
+                    alertMsg("Sign up successful.", "You have successfully signed up. You can now login.");
                 }
             }
         });
@@ -175,7 +175,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
 
     protected void startLoading() {
         proDialog = new ProgressDialog(this);
-        proDialog.setMessage("Signing Up...Please Wait");
+        proDialog.setMessage("Signing up...");
         proDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         proDialog.setCancelable(false);
         proDialog.show();

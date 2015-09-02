@@ -52,7 +52,7 @@ public class LoginActivity extends Activity {
                     public void done(ParseUser user, com.parse.ParseException e) {
                         if (user != null) {
                             if (user.getBoolean("firsttime")) {
-                                alertMsg("Attention!", "Hey Dear New User" + "\n"+ "You Need to Setting Up Your Profile");
+                                alertMsg("New user.", "You must fill out your profile before continuing.");
                             } else {
                                 gotoMatch();
                             }
@@ -116,27 +116,27 @@ public class LoginActivity extends Activity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Please Enter Your Student Email Address").setIcon(android.R.drawable.ic_dialog_email).setView(input).setPositiveButton("Verify", new DialogInterface.OnClickListener() {
+        builder.setTitle("Enter your student email.").setView(input).setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 final String k = generateKey(5);
                 //System.out.println(k);
                 if (isEmailValid(input)) {
                     //send email
                     Toast.makeText(getApplicationContext(),
-                            "Access Code Sent",
+                            "Access code sent to your email.",
                             Toast.LENGTH_LONG).show();
 
-                    sendEmail(input.getText().toString().trim().toLowerCase(),k);
+                    sendEmail(input.getText().toString().trim().toLowerCase(), k);
                     //PopUp
                     AccessCodePopup(input.getText().toString().trim().toLowerCase(), k);
                 } else {
                     if (isEmpty(input.getText().toString())) {
                         Toast.makeText(getApplicationContext(),
-                                "Empty Input",
+                                "Empty input.",
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                "Not A Valid College Email Address",
+                                "Not a valid college email.",
                                 Toast.LENGTH_SHORT).show();
                     }
                     emailPopup();
@@ -150,19 +150,19 @@ public class LoginActivity extends Activity {
     protected void AccessCodePopup(final String email, final String key) {
         final EditText input = new EditText(this);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your Email: " + email);
-        builder.setTitle("Please Enter Your Access Code ").setIcon(android.R.drawable.ic_dialog_alert).setView(input).setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+        builder.setMessage("Email: " + email);
+        builder.setTitle("Enter the access code sent to your email.").setView(input).setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (key.equals(input.getText().toString().trim())) {
                     gotoSignup(email);
                 } else {
                     if (isEmpty(input.getText().toString())) {
                         Toast.makeText(getApplicationContext(),
-                                "Empty Input",
+                                "Empty input.",
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                "Access Code Is Not Valid",
+                                "Access code is not valid.",
                                 Toast.LENGTH_SHORT).show();
                     }
                     AccessCodePopup(email, key);
@@ -215,17 +215,15 @@ public class LoginActivity extends Activity {
                     String[] toArr = {email};
                     m.setTo(toArr);
                     m.setFrom("campusdateapp@gmail.com");
-                    m.setSubject("CampusDate Access Code");
-                    m.setBody("Dear New CampusDate User:" + "\n" + email + "\n" +
-                            "Here is Your Access Code:" + "\n" + code + "\n" +
-                                    "Enjoy & Welcome!" + "\n"
-                            + "CampusDate Team"
+                    m.setSubject("Campusdate Access Code");
+                    m.setBody("Use the following access code to validate your Campusdate account." + "\n" +
+                            "Access code:"  + code
                     );
 
                     try {
                         m.send();
                     } catch(Exception e) {
-                        Log.e("Error", "Could not send email", e);
+                        Log.e("Error", "Could not send email.", e);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
