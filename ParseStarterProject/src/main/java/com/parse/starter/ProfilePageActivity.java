@@ -34,6 +34,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
@@ -45,6 +46,7 @@ import com.parse.ParseUser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 
 public class ProfilePageActivity extends Activity implements AdapterView.OnItemSelectedListener {
@@ -272,6 +274,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
      */
     //This function update user profile after all user inputs are verified
     protected void updateProfile (ParseObject profile){
+        saveGenderInterestToUserTable();
+
         if(bitmap != null){
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -296,7 +300,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
         profile.saveInBackground();
 
-        saveGenderInterestToUserTable();
+
 
         // Show a simple toast message
         Toast.makeText(ProfilePageActivity.this, "Profile Saved",
@@ -306,26 +310,14 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
     protected void saveGenderInterestToUserTable(){
         final ParseUser currentUser = ParseUser.getCurrentUser();
-        final String currentUserObjectIdID = currentUser.getObjectId();
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
-        // Retrieve the object by id
-        //query.whereEqualTo("objectId", currentUserObjectIdID);
-        query.getInBackground(currentUserObjectIdID, new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    object.put("interested_in_females", interestedInFemale);
-                    object.put("interested_in_males", interestedInMale);
-                    object.put("first_name", firstName);
-                    object.put("last_name", lastName);
-                    object.saveInBackground();
-                }else{
-
-                }
-            }
-        });
+        currentUser.put("interested_in_females", interestedInFemale);
+        currentUser.put("interested_in_males", interestedInMale);
+        currentUser.put("first_name", firstName);
+        currentUser.put("last_name", lastName);
+        currentUser.saveInBackground();
     }
+
+
     protected void alertMsg(String title, String msg) {
         //build dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

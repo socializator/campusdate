@@ -126,8 +126,8 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                     profile.put("first_name", firstname);
                     profile.put("last_name", lastname);
                     profile.put("email_domain","ucsd");
-                    profile.addUnique("users_like", "");
-                    profile.addUnique("users_matched_with","");
+                    profile.addUnique("users_like", null);
+                    profile.addUnique("users_matched_with",null);
                     // email domain
                     profile.saveInBackground();
 

@@ -193,7 +193,7 @@ public class LoginActivity extends Activity {
 
     public static String generateKey(int length) {
         String alphabet =
-                new String("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                new String("0123456789ABCDEFGHIJKLMNPQRSTUVWXYZ");
         int n = alphabet.length();
 
         String result = new String();
