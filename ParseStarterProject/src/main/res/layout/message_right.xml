@@ -43,11 +43,9 @@
 
             <TextView
                 android:id="@+id/txtMessage"
-                android:paddingRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:textSize="14sp"
                 android:text="Hello, how are you?"
                 />
 

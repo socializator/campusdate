@@ -17,7 +17,7 @@
     <application
         android:name=".StarterApplication"
         android:allowBackup="true"
-        android:icon="@drawable/newest"
+        android:icon="@drawable/final_logo"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <meta-data

@@ -43,12 +43,10 @@
 
             <TextView
                 android:id="@+id/txtMessage"
-                android:paddingLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
                 android:text="Hello"
                 />
 
