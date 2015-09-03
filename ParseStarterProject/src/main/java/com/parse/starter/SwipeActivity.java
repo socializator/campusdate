@@ -226,8 +226,6 @@ public class SwipeActivity extends Activity {
             @Override
             public void onRightCardExit(Object dataObject) {
                      final CardMode temp = (CardMode) dataObject;
-
-
                     //Like
                     final String currentUserId = ParseUser.getCurrentUser().getObjectId();
                     final ParseQuery<ParseObject> update_user_arrays_query = ParseQuery.getQuery("Profile");

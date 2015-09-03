@@ -119,7 +119,7 @@ public class LoginActivity extends Activity {
         builder.setTitle("Enter your student email.").setView(input).setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 final String k = generateKey(5);
-                //System.out.println(k);
+                System.out.println(k);
                 if (isEmailValid(input)) {
                     //send email
                     Toast.makeText(getApplicationContext(),

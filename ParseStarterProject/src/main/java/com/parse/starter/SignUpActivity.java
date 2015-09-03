@@ -24,6 +24,8 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import java.util.List;
+
 public class SignUpActivity extends Activity implements View.OnClickListener {
 
     protected ProgressDialog proDialog;
@@ -119,10 +121,13 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                         alertMsg("Sign up failed.", e.getMessage());
                 } else {
                     ParseObject profile = new ParseObject("Profile");
+                    String [] s;
                     profile.put("user_object_id", user.getObjectId());
                     profile.put("first_name", firstname);
                     profile.put("last_name", lastname);
                     profile.put("email_domain","ucsd");
+                    profile.addUnique("users_like", "");
+                    profile.addUnique("users_matched_with","");
                     // email domain
                     profile.saveInBackground();
 
