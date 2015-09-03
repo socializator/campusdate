@@ -40,9 +40,6 @@
             android:name=".ProfilePageActivity"
             android:label="@string/title_activity_profile_page" />
         <activity
-            android:name=".Swipe"
-            android:label="Campusdate" />
-        <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" />
         <activity
@@ -52,12 +49,8 @@
             android:name=".MessagingActivity"
             android:label="Hey Chat~" />
         <activity
-            android:name=".VerifyEmailActivity"
-            android:label="@string/title_activity_verify_email" >
-        </activity>
-        <activity
-            android:name=".TinderSwipe"
-            android:label="@string/title_activity_my" >
+            android:name=".SwipeActivity"
+            android:label="@string/title_activity_swipe" >
         </activity>
     </application>
 

@@ -478,7 +478,7 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
 
 
     public void go_to_swipe(View view) {
-        Intent intent = new Intent(this, Swipe.class);
+        Intent intent = new Intent(this, SwipeActivity.class);
         startActivity(intent);
     }
 

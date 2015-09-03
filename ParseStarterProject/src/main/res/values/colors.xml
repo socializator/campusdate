@@ -20,5 +20,7 @@
 
     <color name="gray">#D6D7D7</color>
 
+    <color name="card_background">#ffffff</color>
+    <color name="card_shadow">#10000000</color>
 
 </resources>

@@ -143,7 +143,7 @@ public class MatchActivity extends Activity {
 
 
     public void go_to_swipe(View view) {
-        Intent intent = new Intent(this, Swipe.class);
+        Intent intent = new Intent(this, SwipeActivity.class);
         startActivity(intent);
     }
 

@@ -46,6 +46,7 @@ dependencies {
     compile files('libs/mail.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/activation.jar')
+    compile 'com.github.bumptech.glide:glide:3.6.1'
 }
 
 /* Uncomment if you enable ProGuard and you want to automatically upload symbols on build.

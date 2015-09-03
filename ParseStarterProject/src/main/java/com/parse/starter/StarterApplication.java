@@ -8,6 +8,7 @@
  */
 package com.parse.starter;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.parse.Parse;

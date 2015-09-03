@@ -1,9 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.parse.starter.Swipe">
+    tools:context="com.parse.starter.SwipeActivity">
     <item
         android:id="@+id/logout"
         android:title="Logout" />
-
-
 </menu>
