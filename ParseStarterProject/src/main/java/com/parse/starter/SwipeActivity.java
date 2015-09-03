@@ -89,7 +89,7 @@ public class SwipeActivity extends Activity {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
                     query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
                     query.whereEqualTo("email_domain", ParseUser.getCurrentUser().getString("email_domain"));
-                    query.whereNotContainedIn("user_object_id", object.getList("users_matched_with"));
+                    query.whereNotContainedIn("user_object_id", object.getList("users_like"));
 
                     if (ParseUser.getCurrentUser().getBoolean("interested_in_females"))
                         query.whereEqualTo("gender", "Female");
@@ -111,8 +111,8 @@ public class SwipeActivity extends Activity {
                                 }
                                 for (int z = 0; z < list.size(); z++) {
                                     al.add(new CardMode(name.get(z), age.get(z), list.get(z), user_id.get(z)));
-                                    adapter.notifyDataSetChanged();
                                 }
+                                adapter.notifyDataSetChanged();
                                 stopLoading();
                             }
                             // use data for something
@@ -205,29 +205,31 @@ public class SwipeActivity extends Activity {
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
-                if(adapter.getCount()!=0) {
+                if(adapter.getCount()>1) {
                     al.remove(0);
                     adapter.notifyDataSetChanged();
+                }else if(adapter.getCount()==1){
+                    al.remove(0);
+                    adapter.notifyDataSetChanged();
+                    makeToast(SwipeActivity.this, "No More User");
+                }else{
+                    makeToast(SwipeActivity.this, "No More User");
                 }
             }
 
             @Override
             public void onLeftCardExit(Object dataObject) {
                 //Dislike
-                if(adapter.getCount()==0&&finishtag)
-                    makeToast(SwipeActivity.this, "No More User");
+
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
-                if(adapter.getCount()==0&&finishtag) {
-                    makeToast(SwipeActivity.this, "No More User");
-                }
-                else {
+                     final CardMode temp = (CardMode) dataObject;
+
+
                     //Like
-                    final CardMode temp = (CardMode) dataObject;
                     final String currentUserId = ParseUser.getCurrentUser().getObjectId();
-                    System.out.println(temp.getUserId());
                     final ParseQuery<ParseObject> update_user_arrays_query = ParseQuery.getQuery("Profile");
                     update_user_arrays_query.whereEqualTo("user_object_id", currentUserId);
                     update_user_arrays_query.getFirstInBackground(new GetCallback<ParseObject>() {
@@ -262,15 +264,11 @@ public class SwipeActivity extends Activity {
                         }
                     });
                 }
-            }
+
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
-                //System.out.println(adapter.getCount());
-                //al.add(new CardMode("循环测试", 100, list.get(itemsInAdapter % imageUrls.length - 1)));
-                //System.out.println("Called Empty");
-                //adapter.notifyDataSetChanged();
-                //i++;
+
             }
 
             @Override
