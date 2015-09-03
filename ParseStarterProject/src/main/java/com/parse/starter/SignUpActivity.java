@@ -59,10 +59,10 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        password1 = ((EditText) findViewById(R.id.signup_password)).getText().toString();
-        password2 = ((EditText) findViewById(R.id.signup_password2)).getText().toString();
-        firstname = ((EditText) findViewById(R.id.signup_firstname)).getText().toString();
-        lastname = ((EditText) findViewById(R.id.signup_lastname)).getText().toString();
+        password1 = ((EditText) findViewById(R.id.signup_password)).getText().toString().trim();
+        password2 = ((EditText) findViewById(R.id.signup_password2)).getText().toString().trim();
+        firstname = ((EditText) findViewById(R.id.signup_firstname)).getText().toString().trim();
+        lastname = ((EditText) findViewById(R.id.signup_lastname)).getText().toString().trim();
 
         if (findViewById(R.id.button_cancel).equals(view)) {
             finish();

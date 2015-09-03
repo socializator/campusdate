@@ -17,6 +17,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -50,41 +53,94 @@ public class MatchActivity extends Activity {
         currentUserId = ParseUser.getCurrentUser().getObjectId();
         names = new ArrayList<String>();
 
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereNotEqualTo("objectId", currentUserId);
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> userList, com.parse.ParseException e) {
+        final ParseQuery<ParseObject> user_profile_query = ParseQuery.getQuery("Profile");
+        user_profile_query.whereEqualTo("user_object_id", currentUserId);
+        user_profile_query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(final ParseObject object, ParseException e) {
                 if (e == null) {
-                    for (int i = 0; i < userList.size(); i++) {
-                        names.add(userList.get(i).getUsername().toString());
-                    }
+                    //get list
 
-                    usersListView = (ListView) findViewById(R.id.usersListView);
-                    namesArrayAdapter =
-                            new ArrayAdapter<String>(getApplicationContext(),
-                                    R.layout.user_list_item, names);
-                    usersListView.setAdapter(namesArrayAdapter);
+                    //start query user
 
-                    usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-                            openConversation(names, i);
+                    ParseQuery<ParseUser> query = ParseUser.getQuery();
+                    query.whereNotEqualTo("objectId", currentUserId);
+                    query.whereContainedIn("objectId", object.getList("users_matched_with"));
+                    query.findInBackground(new FindCallback<ParseUser>() {
+                        public void done(List<ParseUser> userList, com.parse.ParseException e) {
+                            if (e == null) {
+                                for (int i = 0; i < userList.size(); i++) {
+                                    String realname = userList.get(i).getString("first_name") + " " + userList.get(i).getString("last_name");
+                                    names.add(realname);
+                                }
+
+                                usersListView = (ListView) findViewById(R.id.usersListView);
+                                namesArrayAdapter =
+                                        new ArrayAdapter<String>(getApplicationContext(),
+                                                R.layout.user_list_item, names);
+                                usersListView.setAdapter(namesArrayAdapter);
+
+                                usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> a, View v, int i, long l) {
+                                        openConversation(names, i);
+                                    }
+                                });
+
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "Error loading user list",
+                                        Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
 
+
                 } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Error loading user list",
-                            Toast.LENGTH_LONG).show();
+                    //error
                 }
             }
         });
+
+
+//        ParseQuery<ParseUser> query = ParseUser.getQuery();
+//        query.whereNotEqualTo("objectId", currentUserId);
+//        query.findInBackground(new FindCallback<ParseUser>() {
+//            public void done(List<ParseUser> userList, com.parse.ParseException e) {
+//                if (e == null) {
+//                    for (int i = 0; i < userList.size(); i++) {
+//                        String realname = userList.get(i).getString("first_name") + " " + userList.get(i).getString("last_name");
+//                        names.add(realname);
+//                    }
+//
+//                    usersListView = (ListView) findViewById(R.id.usersListView);
+//                    namesArrayAdapter =
+//                            new ArrayAdapter<String>(getApplicationContext(),
+//                                    R.layout.user_list_item, names);
+//                    usersListView.setAdapter(namesArrayAdapter);
+//
+//                    usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
+//                            openConversation(names, i);
+//                        }
+//                    });
+//
+//                } else {
+//                    Toast.makeText(getApplicationContext(),
+//                            "Error loading user list",
+//                            Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
     }
 
     //open a conversation with one person
     public void openConversation(ArrayList<String> names, int pos) {
+        String find_names = names.get(pos);
+        String[] splited_names = find_names.split("\\s+");
         ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("username", names.get(pos));
+        query.whereEqualTo("first_name", splited_names[0]);
+        query.whereEqualTo("last_name", splited_names[1]);
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> user, com.parse.ParseException e) {
                 if (e == null) {

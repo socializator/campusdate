@@ -210,8 +210,8 @@ public class ProfilePageActivity extends Activity implements AdapterView.OnItemS
                         if (e == null) {
                             // Now let's update it with some new data. In this case, only cheatMode and score
                             // will get sent to the Parse Cloud. playerName hasn't changed
-                            firstName = firstNameEditText.getText().toString();
-                            lastName = lastNameEditText.getText().toString();
+                            firstName = firstNameEditText.getText().toString().trim();
+                            lastName = lastNameEditText.getText().toString().trim();
 
                             gender = genderSpinner.getSelectedItem().toString();
                             interestedInMale = maleInterestCheckBox.isChecked();
