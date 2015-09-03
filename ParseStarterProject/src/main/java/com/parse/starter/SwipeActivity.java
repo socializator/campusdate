@@ -2,8 +2,10 @@ package com.parse.starter;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -78,40 +80,95 @@ public class SwipeActivity extends Activity {
 
         startLoading();
         //add data to al
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
-        query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
-        query.whereEqualTo("email_domain", ParseUser.getCurrentUser().getString("email_domain"));
 
-        if(ParseUser.getCurrentUser().getBoolean("interested_in_females"))
-            query.whereEqualTo("gender","Female");
-
-        if(ParseUser.getCurrentUser().getBoolean("interested_in_males"))
-            query.whereEqualTo("gender","Male");
-
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> query_list, ParseException e) {
+        final ParseQuery<ParseObject> user_profile_query = ParseQuery.getQuery("Profile");
+        user_profile_query.whereEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
+        user_profile_query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(final ParseObject object, ParseException e) {
                 if (e == null) {
-                    for (int j = 0; j < query_list.size(); j++) {
-                        ParseFile fileObject = query_list.get(j).getParseFile("profile_picture");
-                        name.add(query_list.get(j).getString("first_name") + " " + query_list.get(j).get("last_name"));
-                        age.add(Integer.parseInt(query_list.get(j).getString("age")));
-                        user_id.add(query_list.get(j).getString("user_object_id"));
-                        List<String> s = new ArrayList<>();
-                        s.add(fileObject.getUrl());
-                        list.add(s);
-                    }
-                    for(int z=0;z<list.size();z++){
-                        al.add(new CardMode(name.get(z), age.get(z), list.get(z),user_id.get(z)));
-                        adapter.notifyDataSetChanged();
-                    }
-                    stopLoading();
-                }
-                // use data for something
-                else{
-                    Log.d("test", "There was a problem downloading the data.");
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+                    query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
+                    query.whereEqualTo("email_domain", ParseUser.getCurrentUser().getString("email_domain"));
+                    query.whereNotContainedIn("user_object_id", object.getList("users_matched_with"));
+
+                    if (ParseUser.getCurrentUser().getBoolean("interested_in_females"))
+                        query.whereEqualTo("gender", "Female");
+
+                    if (ParseUser.getCurrentUser().getBoolean("interested_in_males"))
+                        query.whereEqualTo("gender", "Male");
+
+                    query.findInBackground(new FindCallback<ParseObject>() {
+                        public void done(List<ParseObject> query_list, ParseException e) {
+                            if (e == null) {
+                                for (int j = 0; j < query_list.size(); j++) {
+                                    ParseFile fileObject = query_list.get(j).getParseFile("profile_picture");
+                                    name.add(query_list.get(j).getString("first_name") + " " + query_list.get(j).get("last_name"));
+                                    age.add(Integer.parseInt(query_list.get(j).getString("age")));
+                                    user_id.add(query_list.get(j).getString("user_object_id"));
+                                    List<String> s = new ArrayList<>();
+                                    s.add(fileObject.getUrl());
+                                    list.add(s);
+                                }
+                                for (int z = 0; z < list.size(); z++) {
+                                    al.add(new CardMode(name.get(z), age.get(z), list.get(z), user_id.get(z)));
+                                    adapter.notifyDataSetChanged();
+                                }
+                                stopLoading();
+                            }
+                            // use data for something
+                            else {
+                                Log.d("test", "There was a problem downloading the data.");
+                            }
+                        }
+                    });
+
+                } else {
+                    //error
                 }
             }
         });
+
+
+
+
+
+
+//
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery("Profile");
+//        query.whereNotEqualTo("user_object_id", ParseUser.getCurrentUser().getObjectId());
+//        query.whereEqualTo("email_domain", ParseUser.getCurrentUser().getString("email_domain"));
+//        //query.whereNotContainedIn("user_object_id", query.getList("users_matched_with"));
+//
+//        if(ParseUser.getCurrentUser().getBoolean("interested_in_females"))
+//            query.whereEqualTo("gender","Female");
+//
+//        if(ParseUser.getCurrentUser().getBoolean("interested_in_males"))
+//            query.whereEqualTo("gender","Male");
+//
+//        query.findInBackground(new FindCallback<ParseObject>() {
+//            public void done(List<ParseObject> query_list, ParseException e) {
+//                if (e == null) {
+//                    for (int j = 0; j < query_list.size(); j++) {
+//                        ParseFile fileObject = query_list.get(j).getParseFile("profile_picture");
+//                        name.add(query_list.get(j).getString("first_name") + " " + query_list.get(j).get("last_name"));
+//                        age.add(Integer.parseInt(query_list.get(j).getString("age")));
+//                        user_id.add(query_list.get(j).getString("user_object_id"));
+//                        List<String> s = new ArrayList<>();
+//                        s.add(fileObject.getUrl());
+//                        list.add(s);
+//                    }
+//                    for(int z=0;z<list.size();z++){
+//                        al.add(new CardMode(name.get(z), age.get(z), list.get(z),user_id.get(z)));
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                    stopLoading();
+//                }
+//                // use data for something
+//                else{
+//                    Log.d("test", "There was a problem downloading the data.");
+//                }
+//            }
+//        });
 
 
 //        for (int i = 0; i < imageUrls.length; i++) {
@@ -191,6 +248,7 @@ public class SwipeActivity extends Activity {
 
                                                 currentuser_object.addUnique("users_matched_with", temp.getUserId());
                                                 currentuser_object.saveInBackground();
+                                                makeToast(SwipeActivity.this, "You Have a New Match!");
                                             }
                                         } else {
                                             // error

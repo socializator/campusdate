@@ -51,10 +51,9 @@
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:rotation_degrees="15.5"
+        app:rotation_degrees="30"
         android:layout_below="@+id/tabs"
         android:layout_marginTop="100dp"
-        android:background="@drawable/profile_pic_border"
         tools:context="com.parse.starter.SwipeActivity" />
 
 
